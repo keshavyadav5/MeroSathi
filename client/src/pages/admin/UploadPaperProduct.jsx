@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import axios from 'axios';
 import Loading from '@/components/features/Loading';
+import { toast } from 'react-toastify';
 
 const UploadFiles = () => {
   const [files, setFiles] = useState([]);
@@ -74,7 +75,7 @@ const UploadFiles = () => {
       );
 
       console.log(cloudinaryResponse);
-      
+
 
       const imageUrl = cloudinaryResponse.data.secure_url;
 
@@ -84,12 +85,16 @@ const UploadFiles = () => {
       });
 
       if (response?.error?.message) {
+        toast.error(response.error.message)
         setError(response?.error?.message)
       }
-
+      console.log(response);
+      
+      toast.success(response.data.message)
       setFiles([]);
       setFormData({ name: '', category: 'paper-product', subcategory: 'document', price: '2', status: 'uncharacteroized' });
     } catch (error) {
+      toast.error(error?.response?.data?.message)
       console.error("Error uploading product:", error);
     } finally {
       setLoading(false);

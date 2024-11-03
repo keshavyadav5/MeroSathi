@@ -18,6 +18,10 @@ import Private_Admin from './pages/admin/Private_Admin'
 import Dashboard from './pages/admin/Dashboard'
 import UploadPaperProduct from './pages/admin/UploadPaperProduct'
 import Details from './pages/admin/Details'
+import PrintPaperProduct from './components/user/paper-product/PrintPaperProduct'
+
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const App = () => {
@@ -50,9 +54,15 @@ const App = () => {
               <Route path='upload-paper-product' element={<UploadPaperProduct />} />
             </Route>
           </Route>
+
+          {/** All Product Routes */}
+
+          {/** User Features routes */}
+          <Route path='print-paper-product/:subcategory' element={<PrintPaperProduct />} />
         </Route>
       </Routes>
       <Footer />
+      <ToastContainer position="top-right" autoClose={1500} />
     </>
   ) : <>
     <Loading isLoading={isLoading} />

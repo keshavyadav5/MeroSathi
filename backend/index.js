@@ -6,7 +6,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 dotenv.config();
 const authRouter = require('./routes/auth.route')
-const paperProduct = require('./routes/admin.route')
+const paperProduct = require('./routes/product.route')
 
 // Middleware
 app.use(cors({

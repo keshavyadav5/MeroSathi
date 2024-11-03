@@ -23,6 +23,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { logout } from '@/redux/AuthSlice';
 import { DashboardIcon } from '@radix-ui/react-icons';
+import { toast } from 'react-toastify';
 
 const Header = () => {
   const [isAuth, setIsAuth] = useState(false);
@@ -53,6 +54,7 @@ const Header = () => {
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/auth/signout`);
       if (response.data.success) {
+        toast.success(response.data.message)
         dispatch(logout());
         navigate('/');
       }

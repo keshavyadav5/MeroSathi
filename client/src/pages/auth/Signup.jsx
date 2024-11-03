@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const formSchema = z.object({
   fullName: z.string({ required_error: "Name is required" }).min(2, { message: "Full Name must be at least 2 characters." }).max(30, { message: "Full Name must not be more than 30 characters." }),
@@ -63,11 +64,13 @@ const Signup = () => {
       }, { withCredentials: true });
 
       if (response.data.success) {
+        toast.success(response?.data?.message)
         navigate('/auth/signin');
       }
     } catch (error) {
       console.error("Error message:", error.message);
       if (error.response) {
+        toast.error(error?.response?.data.message)
         setError(error.response.data.message);
         console.error("Response data:", error.response.data);
       }

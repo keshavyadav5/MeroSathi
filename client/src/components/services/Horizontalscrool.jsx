@@ -1,5 +1,6 @@
 import React, { useRef } from 'react';
 import { GrNext, GrPrevious } from 'react-icons/gr';
+import Cart from './Cart';
 
 const HorizontalScroll = ({ printProducts, title }) => {
   const scrollRef = useRef(null);
@@ -8,7 +9,7 @@ const HorizontalScroll = ({ printProducts, title }) => {
     scrollRef.current.scrollBy({
       left: -260,
       behavior: 'smooth',
-    });
+    }); 
   };
 
   const scrollRight = () => {
@@ -32,19 +33,10 @@ const HorizontalScroll = ({ printProducts, title }) => {
         </div>
       </div>
 
-      <div className='flex gap-5 overflow-x-scroll scrollbar-hide py-4' ref={scrollRef}>
+      <div className='flex gap-5 overflow-x-scroll scrollbar-hide py-4 cursor-pointer' ref={scrollRef} >
 
         {printProducts.map((item, index) => (
-          <div key={index} className='w-48 h-48 sm:w-56 sm:h-56 flex-shrink-0 rounded-sm flex flex-col items-center overflow-hidden border shadow-md'>
-
-            <div className='w-full h-[80%]'>
-              <img src={item.image} alt={item.name} className='w-full h-full object-cover rounded-t-none rounded-b-xl border-b-2' />
-            </div>
-
-            <div className='py-2 text-center'>
-              <h3 className='text-sm text-slate-800 font-bold'>{item.name.replace(/_/g, " ").replace(/-/g, "/")}</h3>
-            </div>
-          </div>
+          <Cart key={item._id || item.id + index} item={item} />
         ))}
 
       </div>

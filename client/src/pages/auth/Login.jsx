@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { signinFailed, signinStart, signinSuccess } from '@/redux/AuthSlice';
+import { toast } from 'react-toastify';
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -53,12 +54,16 @@ const Login = () => {
       if (response.data.success) {
         dispatch(signinSuccess(response.data));
         setLoading(false)
+        toast.success(response.data.message)
         navigate('/');
       }
     } catch (error) {
       setIsError(error.message);
+      if (error.response) {
+        toast.error(error.response.data.message)
+      }
       dispatch(signinFailed(error.response ? error.response.data.message : "An unexpected error occurred"));
-    }finally{
+    } finally {
       setLoading(false)
     }
   };
