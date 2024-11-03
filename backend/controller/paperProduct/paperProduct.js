@@ -11,6 +11,9 @@ const uploadPaperProduct = async (req, res) => {
     if (!name || !category || !subcategory || !image || !price || !status) {
       return res.status(400).json({ success: false, message: "Please fill all the fields" });
     }
+    if (price < 1) {
+      return res.status(400).json({ success: false, message: "Price should be greater or equal to 1" });
+    }
 
     const isAvailable = await Paperproduct.findOne({ name, category, subcategory });
     if (isAvailable) {
@@ -34,6 +37,8 @@ const uploadPaperProduct = async (req, res) => {
     });
 
   } catch (error) {
+    console.log(error);
+    
     return res.status(500).json({ success: false, message: "Unable to save your product" });
   }
 }
@@ -64,7 +69,7 @@ const updatePaperProduct = async (req, res) => {
     if (role !== 'admin') {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
-    
+
     if (!name || !image || !price) {
       return res.status(400).json({ success: false, message: "Name, image, and price are required" });
     }
@@ -75,7 +80,7 @@ const updatePaperProduct = async (req, res) => {
       subcategory,
       _id: { $ne: productId }
     });
-    
+
     if (isAvailable) {
       return res.status(400).json({ success: false, message: "Product with same name, category, and subcategory already exists" });
     }
@@ -83,7 +88,7 @@ const updatePaperProduct = async (req, res) => {
     const updatedPaperProduct = await Paperproduct.findByIdAndUpdate(
       productId,
       { name, category, subcategory, image, price, status },
-      { new: true } 
+      { new: true }
     );
 
     if (!updatedPaperProduct) {

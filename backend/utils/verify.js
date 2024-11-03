@@ -3,6 +3,7 @@ const dotenv = require('dotenv').config();
 
 const verifyToken = async (req, ress, next) => {
   const cookie = req.headers.cookie;
+
   if (!cookie) {
     return ress.status(401).send({ message: 'Unauthorized' });
   }
@@ -19,7 +20,7 @@ const verifyToken = async (req, ress, next) => {
     req.id = user.userId,
       req.role = user.role
 
-      next();
+    next();
 
   })
 }

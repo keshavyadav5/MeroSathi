@@ -23,7 +23,7 @@ const paperProductSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['trending', 'newlaunched', 'upcoming'],
+    enum: ['trending', 'newlaunched', 'upcoming','uncharacteroized'],
     required : true
   }
 })

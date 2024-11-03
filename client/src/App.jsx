@@ -16,6 +16,8 @@ import Profile from './pages/auth/Profile'
 import PrivateAuth from './pages/auth/PrivateAuth'
 import Private_Admin from './pages/admin/Private_Admin'
 import Dashboard from './pages/admin/Dashboard'
+import UploadPaperProduct from './pages/admin/UploadPaperProduct'
+import Details from './pages/admin/Details'
 
 
 const App = () => {
@@ -43,7 +45,10 @@ const App = () => {
 
           {/** Admin routes */}
           <Route path='/admin' element={<Private_Admin />} >
-            <Route path='dashboard' element={<Dashboard />} />
+            <Route path='dashboard' element={<Dashboard />} >
+              <Route path='' element={<Details />} />
+              <Route path='upload-paper-product' element={<UploadPaperProduct />} />
+            </Route>
           </Route>
         </Route>
       </Routes>

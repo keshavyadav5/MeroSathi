@@ -4,7 +4,7 @@ const { Signup,
   verifyEmail,
   signOut,
   updateUser,
-  updatePassword }
+  updatePassword } 
   = require('../controller/auth.controller');
   
 const { verifyToken } = require('../utils/verify');

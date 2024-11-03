@@ -8,8 +8,8 @@ const {
 } = require('../controller/paperProduct/paperProduct');
 const router = express.Router();
 
-// paper product routes
-router.post('/paper-product/upload', verifyToken, uploadPaperProduct)
+// paper product routes 
+router.post('/paper-product/upload',verifyToken, uploadPaperProduct)
 router.post('/paper-product/delete/:productId', verifyToken, deletePaperProduct)
 router.patch('/paper-product/update/:productId', verifyToken, updatePaperProduct)
 router.get('/paper-product', getPaperProduct)

@@ -22,9 +22,11 @@ import Navmobile from './Navmobile';
 import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { logout } from '@/redux/AuthSlice';
+import { DashboardIcon } from '@radix-ui/react-icons';
 
 const Header = () => {
   const [isAuth, setIsAuth] = useState(false);
+  const [isAdmin, setIsAdmin] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [userName, setUserName] = useState('');
   const { currentUser } = useSelector(state => state.user || {});
@@ -33,6 +35,9 @@ const Header = () => {
 
   useEffect(() => {
     setIsAuth(!!currentUser);
+    if (currentUser?.user?.role === 'admin') {
+      setIsAdmin(true);
+    }
     if (currentUser) {
       const data = (currentUser?.user?.name).split(" ");
       if (data.length < 10) {
@@ -101,12 +106,18 @@ const Header = () => {
                 <DropdownMenuItem onClick={() => navigate('/profile')}>
                   <User /> Profile
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/orders')}>
-                  <ListOrdered /> Orders
-                </DropdownMenuItem>
-                <DropdownMenuItem onClick={() => navigate('/cart')}>
-                  <ShoppingCartIcon /> Cart
-                </DropdownMenuItem>
+                {
+                  isAdmin ? <DropdownMenuItem onClick={() => navigate('/admin/dashboard')}>
+                    <DashboardIcon /> Dashboard
+                  </DropdownMenuItem> : <>
+                    <DropdownMenuItem onClick={() => navigate('/orders')}>
+                      <ListOrdered /> Orders
+                    </DropdownMenuItem>
+                    <DropdownMenuItem onClick={() => navigate('/cart')}>
+                      <ShoppingCartIcon /> Cart
+                    </DropdownMenuItem>
+                  </>
+                }
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={handleSignout}>
                   <LogOut /> Logout
