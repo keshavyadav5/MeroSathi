@@ -1,13 +1,13 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation } from 'react-router-dom';
 
 const Dashboard = () => {
   const location = useLocation();
   const [activeLink, setActiveLink] = useState();
 
-useEffect(()=>{
-  setActiveLink(location.pathname)
-},[location.pathname])
+  useEffect(() => {
+    setActiveLink(location.pathname)
+  }, [location.pathname])
 
   const dashboardSidebar = () => [
     { id: 1, name: "Dashboard", slug: "/admin/dashboard", active: true },
@@ -24,7 +24,7 @@ useEffect(()=>{
             <Link
               key={item.id}
               to={item.slug}
-              className={`block w-full text-lg p-2 bg-slate-50 rounded-sm ${activeLink === item.slug ? 'bg-slate-500 text-white' : 'hover:bg-gray-300'
+              className={`block w-full text-lg p-2 bg-green-50 rounded-sm ${activeLink === item.slug ? 'bg-green-500 text-white' : 'hover:bg-green-300'
                 }`}
             >
               {item.name}

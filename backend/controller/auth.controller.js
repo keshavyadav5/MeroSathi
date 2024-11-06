@@ -6,7 +6,7 @@ const { sendVerificationToken, sendWelcomeEmail } = require('../mailtrap/email.j
 
 
 const Signup = async (req, res) => {
-  const { name, email, password, phone } = req.body;
+  const { name, email, password, phone, gender } = req.body;
 
   try {
     if (!name || !email || !password || !phone) {
@@ -26,6 +26,7 @@ const Signup = async (req, res) => {
       email,
       password: hashedPassword,
       phone,
+      gender,
       verificationToken,
       verificationTokenExpiresAt: Date.now() + 24 * 60 * 60 * 1000
     });

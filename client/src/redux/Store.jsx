@@ -4,7 +4,7 @@ import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
 import authReducer from './authSlice';
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { paperProductApi } from './Postslice';
+import { adminApi } from './AdminSlice';
 
 
 const persistConfig = {
@@ -15,7 +15,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: authReducer,
-  [paperProductApi.reducerPath]: paperProductApi.reducer,
+  [adminApi.reducerPath]: adminApi.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
@@ -25,7 +25,7 @@ const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
-    }).concat(paperProductApi.middleware),
+    }).concat(adminApi.middleware),
 });
 
 setupListeners(store.dispatch);

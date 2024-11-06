@@ -107,7 +107,7 @@ const UploadFiles = () => {
     (
       <div className='px- lg:px-20 pt-10 pb-32 min-h-screen max-h-screen overflow-y-auto scrollbar-hide hidden md:block'>
         <h2 className="text-2xl font-bold mb-1 text-slate-600">Upload Files</h2>
-        <p className="text-gray-600 text-sm mb-4">Please upload only one image for one category</p>
+        <p className="text-gray-600 text-sm mb-4">Please upload only one image for one product</p>
 
         <div
           {...getRootProps()}

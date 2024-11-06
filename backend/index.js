@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 dotenv.config();
 const authRouter = require('./routes/auth.route')
 const paperProduct = require('./routes/product.route')
+const adminRoute = require('./routes/admin')
 
 // Middleware
 app.use(cors({
@@ -21,6 +22,7 @@ app.use(express.json());
 
 app.use('/api/auth', authRouter)
 app.use('/api',paperProduct)
+app.use('/api/admin',adminRoute)
 
 
 const port = process.env.PORT || 3000;
