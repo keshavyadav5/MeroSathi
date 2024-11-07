@@ -22,6 +22,8 @@ import PrintPaperProduct from './components/user/paper-product/PrintPaperProduct
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Total_product from './pages/admin/total-user-products/Total_product'
+import Total_user from './pages/admin/total-user-products/Total_user'
 
 
 const App = () => {
@@ -50,7 +52,10 @@ const App = () => {
           {/** Admin routes */}
           <Route path='/admin' element={<Private_Admin />} >
             <Route path='dashboard' element={<Dashboard />} >
-              <Route path='' element={<Details />} />
+              <Route path='' element={<Details />} >
+                <Route path='products' element={<Total_product />} />
+                <Route path='users' element={<Total_user />} />
+              </Route>
               <Route path='upload-paper-product' element={<UploadPaperProduct />} />
             </Route>
           </Route>

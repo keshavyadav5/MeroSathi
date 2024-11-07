@@ -88,7 +88,6 @@ const UploadFiles = () => {
         toast.error(response.error.message)
         setError(response?.error?.message)
       }
-      console.log(response);
       
       toast.success(response.data.message)
       setFiles([]);

@@ -38,7 +38,7 @@ const uploadPaperProduct = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    
+
     return res.status(500).json({ success: false, message: "Unable to save your product" });
   }
 }
@@ -63,14 +63,14 @@ const deletePaperProduct = async (req, res) => {
 const updatePaperProduct = async (req, res) => {
   const productId = req.params.productId;
   const role = req.role;
-  const { name, category, subcategory, image, price, status } = req.body;
-
+  const { name, category, subcategory, price, status } = req.body;
+ 
   try {
     if (role !== 'admin') {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
 
-    if (!name || !image || !price) {
+    if (!name || !price) {
       return res.status(400).json({ success: false, message: "Name, image, and price are required" });
     }
 
@@ -87,7 +87,7 @@ const updatePaperProduct = async (req, res) => {
 
     const updatedPaperProduct = await Paperproduct.findByIdAndUpdate(
       productId,
-      { name, category, subcategory, image, price, status },
+      { name, category, subcategory, price, status },
       { new: true }
     );
 

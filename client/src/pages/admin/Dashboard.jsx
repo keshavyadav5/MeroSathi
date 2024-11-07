@@ -10,10 +10,11 @@ const Dashboard = () => {
   }, [location.pathname])
 
   const dashboardSidebar = () => [
-    { id: 1, name: "Dashboard", slug: "/admin/dashboard", active: true },
-    { id: 2, name: "Profile", slug: "/profile", active: true },
-    { id: 3, name: "Upload Paper Product", slug: "/admin/dashboard/upload-paper-product", active: true },
-    { id: 4, name: "Settings", slug: "/settings", active: true },
+    { id: 1, name: "Producsts", slug: "/admin/dashboard/products", active: true },
+    { id: 2, name: "Users", slug: "/admin/dashboard/users", active: true },
+    { id: 3, name: "Profile", slug: "/profile", active: true },
+    { id: 4, name: "Upload Paper Product", slug: "/admin/dashboard/upload-paper-product", active: true },
+    { id: 5, name: "Settings", slug: "/settings", active: true },
   ];
 
   return (

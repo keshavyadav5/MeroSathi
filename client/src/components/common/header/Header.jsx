@@ -109,7 +109,7 @@ const Header = () => {
                   <User /> Profile
                 </DropdownMenuItem>
                 {
-                  isAdmin ? <DropdownMenuItem onClick={() => navigate('/admin/dashboard')}>
+                  isAdmin ? <DropdownMenuItem onClick={() => navigate('/admin/dashboard/products')}>
                     <DashboardIcon /> Dashboard
                   </DropdownMenuItem> : <>
                     <DropdownMenuItem onClick={() => navigate('/orders')}>
