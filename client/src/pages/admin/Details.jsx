@@ -5,15 +5,11 @@ import { useSelector } from 'react-redux'
 import { Cross1Icon } from '@radix-ui/react-icons'
 
 import { Outlet } from 'react-router-dom'
-import Total_product from './total-user-products/Total_product'
-import Total_user from './total-user-products/Total_user'
-
 
 
 const Details = () => {
   const [user, setUser] = useState('');
   const [showAdminName, setShowAdminName] = useState(true);
-  const [showProduct, setShowProduct] = useState(true);
 
   const { currentUser } = useSelector(state => state.user || {});
 

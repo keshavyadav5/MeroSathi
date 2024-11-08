@@ -5,6 +5,6 @@ const router = express.Router();
 
 
 router.get('/getAllUsers', verifyToken, getAllUser);
-router.get('/getAllProducts', getAllProducts);
+router.get('/getAllProducts',verifyToken, getAllProducts);
 
 module.exports = router

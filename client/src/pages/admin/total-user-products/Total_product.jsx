@@ -71,10 +71,11 @@ const Total_product = () => {
 
   const AllProduct = async () => {
     try {
-      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/admin/getAllProducts/?page=${page}&limit=10&search=${search}`);
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/admin/getAllProducts/?page=${page}&limit=10&search=${search}`, {
+        withCredentials: true
+      });
 
       if (response?.data?.success) {
-        console.log();
 
         setGetAllPaperProducts(response?.data?.paperProducts)
       }

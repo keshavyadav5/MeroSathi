@@ -4,9 +4,10 @@ const { Signup,
   verifyEmail,
   signOut,
   updateUser,
-  updatePassword } 
+  updatePassword,
+  deleteUser }
   = require('../controller/auth.controller');
-  
+
 const { verifyToken } = require('../utils/verify');
 const router = express.Router();
 
@@ -16,6 +17,7 @@ router.post('/signin', Signin);
 router.post('/signout', signOut)
 router.post('/update/:userId', verifyToken, updateUser)
 router.post('/update-password/:userId', verifyToken, updatePassword)
+router.delete('/delete-user/:userId', verifyToken, deleteUser)
 
 // router.post('/verify-email', verifyEmail)
 

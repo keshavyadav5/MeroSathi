@@ -1,30 +1,33 @@
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 
-const verifyToken = async (req, ress, next) => {
+const verifyToken = (req, res, next) => {
+
   const cookie = req.headers.cookie;
-
   if (!cookie) {
-    return ress.status(401).send({ message: 'Unauthorized' });
+    console.log("No cookie found");
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
+
   const token = cookie.split("=")[1];
-
   if (!token) {
-    return ress.status(401).send({ message: 'Unauthorized' });
+    console.log("No token found in cookie");
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
 
-  jwt.verify(String(token), process.env.SECRET_KEY, (err, user) => {
+  jwt.verify(token, process.env.SECRET_KEY, (err, decoded) => {
     if (err) {
-      return ress.status(403).send({ message: 'Failed to authenticate token, login again.' });
+      console.error("Token verification failed:", err.message);
+      return res.status(403).json({ success: false, message: 'Failed to authenticate token, login again.' });
     }
-    req.id = user.userId,
-      req.role = user.role
+
+    req.id = decoded.userId;
+    req.role = decoded.role;
 
     next();
-
-  })
-}
+  });
+};
 
 module.exports = {
-  verifyToken
-}
+  verifyToken,
+};
