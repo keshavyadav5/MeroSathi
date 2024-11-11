@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage';
 import { persistReducer, persistStore } from 'redux-persist';
 import { combineReducers } from 'redux';
 import authReducer from './authSlice';
+import uploadReducer from './UploadSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { adminApi } from './AdminSlice';
 
@@ -15,6 +16,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   user: authReducer,
+  upload: uploadReducer,
   [adminApi.reducerPath]: adminApi.reducer,
 });
 

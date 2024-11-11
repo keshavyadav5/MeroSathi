@@ -24,6 +24,7 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Total_product from './pages/admin/total-user-products/Total_product'
 import Total_user from './pages/admin/total-user-products/Total_user'
+import UploadpaperproductDetails from './components/user/paper-product/UploadpaperproductDetails'
 
 
 const App = () => {
@@ -64,10 +65,11 @@ const App = () => {
 
           {/** User Features routes */}
           <Route path='print-paper-product/:subcategory' element={<PrintPaperProduct />} />
+          <Route path='upload-paper-product-details' element={<UploadpaperproductDetails />} />
         </Route>
       </Routes>
       <Footer />
-      <ToastContainer position="top-right" autoClose={1500} />
+      <ToastContainer position="top-right" autoClose={1200} />
     </>
   ) : <>
     <Loading isLoading={isLoading} />

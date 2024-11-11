@@ -8,6 +8,7 @@ dotenv.config();
 const authRouter = require('./routes/auth.route')
 const paperProduct = require('./routes/product.route')
 const adminRoute = require('./routes/admin')
+const cart = require('./routes/user.route')
 
 // Middleware
 app.use(cors({
@@ -21,9 +22,9 @@ app.use(express.json());
 
 
 app.use('/api/auth', authRouter)
-app.use('/api',paperProduct)
-app.use('/api/admin',adminRoute)
-
+app.use('/api', paperProduct)
+app.use('/api/admin', adminRoute)
+app.use('/api/user', cart)
 
 const port = process.env.PORT || 3000;
 app.listen(3000, () => {

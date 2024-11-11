@@ -1,13 +1,21 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Cart = ({ item }) => {
-
+  const { currentUser } = useSelector(state => state.user);
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-    if (item?.category === "paper-product") {
+    if (currentUser && currentUser?.user?.role === 'admin') {
+      toast.error("You must an user to use this facilities")
+      return;
+    }
+    if (item?.category === "paper-product" && currentUser) {
       navigate(`/print-paper-product/${item?.subcategory}`)
+    } else {
+      navigate('auth/signin')
     }
   }
   return (
