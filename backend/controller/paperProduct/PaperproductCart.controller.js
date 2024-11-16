@@ -3,6 +3,7 @@ const paperProductCartModel = require("../../models/cart/paperproductcart.model"
 const paperProductCart = async (req, res) => {
   const {
     category,
+    subcategory,
     imageUrl,
     price,
     name,
@@ -18,6 +19,7 @@ const paperProductCart = async (req, res) => {
     orientation,
     printcolor,
   } = req.body;
+console.log(req.body);
 
   const role = req.role;
   const id = req.id;
@@ -27,18 +29,10 @@ const paperProductCart = async (req, res) => {
       return res.status(401).json({ success: false, message: 'Unauthorized' });
     }
 
-    if (!name || !imageUrl || !pages || !size) {
-      return res.status(400).json({ success: false, message: 'Please fill all fields' });
-    }
-
-    const maxSize = 100 * 1024 * 1024;
-    if (size > maxSize) {
-      return res.status(400).json({ success: false, message: 'File size is too large' });
-    }
-
     const product = {
       details: {
         category,
+        subcategory,
         imageUrl,
         name,
         size,
@@ -62,6 +56,17 @@ const paperProductCart = async (req, res) => {
     if (!cart) {
       cart = await paperProductCartModel.create({ userId: id, products: [product] });
     } else {
+      const existingProduct = cart.products.find(
+        (p) =>
+          p.details.name === product.details.name &&
+          p.details.category === product.details.category &&
+          p.details.subcategory === product.details.subcategory
+      );
+
+      if (existingProduct) {
+        return res.status(400).json({ success: false, message: 'Product already in cart' });
+      }
+
       cart.products.push(product);
       await cart.save();
     }
@@ -69,13 +74,14 @@ const paperProductCart = async (req, res) => {
     return res.status(201).json({
       success: true,
       message: 'Product added to cart successfully',
-      cart,
+      products: cart.products,
     });
   } catch (error) {
-    console.error("Error adding product to cart:", error);
-    return res.status(500).json({ success: false, message: "Not able to add to cart" });
+    console.error("Error adding product to cart:", error.message);
+    return res.status(500).json({ success: false, message: 'Not able to add to cart' });
   }
 };
+
 
 const updatePaperProductCart = async (req, res) => {
   const { copy } = req.body;
@@ -155,24 +161,31 @@ const getAllCartsItems = async (req, res) => {
   const role = req.role;
   try {
     if (role !== 'user') {
-      return res.status(401).json({ success: false, message: "unauthorized" });
+      return res.status(401).json({ success: false, message: "Unauthorized" });
     }
+
     const cart = await paperProductCartModel.findOne({ userId });
+
     if (!cart) {
-      return res.status(404).json({ success: false, message: 'Cart not found' });
-    }
-    return res
-      .status(200)
-      .json({
+      return res.status(200).json({
         success: true,
-        message: "cart items",
-        totalItems: cart.products.length,
-        data: cart.products
+        message: "No items in cart",
+        totalItems: 0,
+        data: [],
       });
+    }
+
+    return res.status(200).json({
+      success: true,
+      message: "Cart items",
+      totalItems: cart.products.length,
+      data: cart.products,
+    });
   } catch (error) {
-    return res.status(403).json({ success: false, message: 'Not able to fetch cart items' })
+    return res.status(500).json({ success: false, message: 'Internal server error' });
   }
-}
+};
+
 
 
 

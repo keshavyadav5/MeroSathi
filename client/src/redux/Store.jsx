@@ -6,6 +6,7 @@ import authReducer from './authSlice';
 import uploadReducer from './UploadSlice'
 import { setupListeners } from '@reduxjs/toolkit/query'
 import { adminApi } from './AdminSlice';
+import cartReducer from './Cartslice'
 
 
 const persistConfig = {
@@ -17,6 +18,7 @@ const persistConfig = {
 const rootReducer = combineReducers({
   user: authReducer,
   upload: uploadReducer,
+  cart: cartReducer,
   [adminApi.reducerPath]: adminApi.reducer,
 });
 

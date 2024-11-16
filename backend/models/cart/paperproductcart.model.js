@@ -12,9 +12,13 @@ const paperProductCartSchema = new mongoose.Schema({
         type: String,
         required: true,
       },
+      subcategory: {
+        type: String,
+        required: true, 
+      },
       imageUrl: {
         type: String,
-        required: true,
+        // required: true,
       },
       name: {
         type: String,
@@ -29,9 +33,10 @@ const paperProductCartSchema = new mongoose.Schema({
       },
       description: {
         type: String,
-        default: ""
+        default: "",
       },
     },
+
     pricing: {
       price: {
         type: Number,

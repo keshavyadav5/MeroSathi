@@ -122,7 +122,9 @@ const PaperProductFileUpload = () => {
         ...file,
         progress: 100,
         status: "completed",
+        category: params.category,
         subcategory: params.subcategory,
+        name: params.name
       }));
 
       setFiles(filesWithSubcategory);
@@ -130,7 +132,6 @@ const PaperProductFileUpload = () => {
       dispatch(setUploadFiles(filesWithSubcategory));
       navigate('/upload-paper-product-details')
       setLoading(false);
-      console.log("Files uploaded successfully");
     } catch (error) {
       console.error("Error uploading files:", error);
       setLoading(false);
@@ -151,8 +152,8 @@ const PaperProductFileUpload = () => {
       <div
         ref={dropZoneRef}
         className={`border-2 flex flex-col justify-center items-center border-dashed rounded-lg p-8 mb-4 text-center h-[350px] transition-colors cursor-pointer ${isDragging
-          ? "border-green-500 bg-green-100"
-          : "border-green-300 bg-green-50"
+          ? "border-[#533d64] bg-[#e3befe]"
+          : "border-[#533d64] bg-[#e3befe]"
           }`}
         onDrop={handleDrop}
         onDragOver={handleDragOver}
@@ -229,7 +230,7 @@ const PaperProductFileUpload = () => {
         </Button>
         <Button
           variant="primary"
-          className="bg-[#008c3e] text-white"
+          className="bg-[#533d64] text-white"
           onClick={handleFileUpload}
           disabled={files.length === 0 || loading}
         >
@@ -242,14 +243,14 @@ const PaperProductFileUpload = () => {
         <h3 className="text-slate-600 text-md">Lorem ipsum dolor sit amet. lorem Lorem, ipsum dolor.</h3>
         <p className="pt-5 pb-2 text-slate-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum animi nisi error incidunt esse deleniti eligendi fugit iure laboriosam beatae. Laborum suscipit quia aliquid amet doloribus. Et tempora adipisci labore quo! Tempora unde optio iste assumenda odit placeat excepturi, saepe, ipsa debitis voluptatibus eos rem nisi rerum, molestiae iusto! Libero! Lorem ipsum dolor sit amet consectetur adipisicing elit. Expedita laboriosam debitis placeat, quaerat hic et incidunt. Dolores quia omnis eveniet labore, hic tempore?
           {
-            !readMore && <button className="text-green-600 px-2 hover:underline transition-all duration-300" onClick={() => setReadMore(!readMore)}>read more...</button>
+            !readMore && <button className="text-[#894fb6] px-2 hover:underline transition-all duration-300" onClick={() => setReadMore(!readMore)}>read more...</button>
           }
         </p>
         {
           readMore && <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Officia distinctio quaerat accusamus ea, sed similique error nam maxime iure, optio laboriosam voluptates, consequuntur totam corrupti rerum. Doloribus ab commodi ut architecto. Ab et suscipit vel veritatis reiciendis excepturi possimus dolores, minima accusamus officiis, molestiae nihil ratione aperiam officia impedit neque, enim deleniti libero inventore placeat iusto unde? Veritatis labore reprehenderit iste optio facere non atque obcaecati? Eos culpa labore assumenda sequi omnis ipsam delectus possimus inventore exercitationem dolore impedit laboriosam, excepturi quibusdam, temporibus itaque, expedita laborum fugit sint nam non sed voluptas id tenetur. Quaerat adipisci nam ut minima neque.
 
-            <button className="text-green-600 px-2 hover:underline transition-all duration-300" onClick={() => setReadMore(!readMore)}>read less...</button>
+            <button className="text-[#894fb6]  px-2 hover:underline transition-all duration-300" onClick={() => setReadMore(!readMore)}>read less...</button>
           </p>
         }
       </div>

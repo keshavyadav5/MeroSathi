@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 import { GrNext, GrPrevious } from 'react-icons/gr';
-import Cart from './Cart';
+import Card from './Card';
 
 const HorizontalScroll = ({ printProducts, title }) => {
   const scrollRef = useRef(null);
@@ -36,7 +36,7 @@ const HorizontalScroll = ({ printProducts, title }) => {
       <div className='flex gap-5 overflow-x-scroll scrollbar-hide py-4 cursor-pointer' ref={scrollRef} >
 
         {printProducts.map((item, index) => (
-          <Cart key={item._id || item.id + index} item={item} />
+          <Card key={item._id || item.id + index} item={item} />
         ))}
 
       </div>

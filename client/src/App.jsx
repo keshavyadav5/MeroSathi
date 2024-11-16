@@ -25,6 +25,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import Total_product from './pages/admin/total-user-products/Total_product'
 import Total_user from './pages/admin/total-user-products/Total_user'
 import UploadpaperproductDetails from './components/user/paper-product/UploadpaperproductDetails'
+import Cart from './components/user/cart/Cart'
 
 
 const App = () => {
@@ -64,8 +65,9 @@ const App = () => {
           {/** All Product Routes */}
 
           {/** User Features routes */}
-          <Route path='print-paper-product/:subcategory' element={<PrintPaperProduct />} />
+          <Route path='print-paper-product/:category/:subcategory/:name' element={<PrintPaperProduct />} />
           <Route path='upload-paper-product-details' element={<UploadpaperproductDetails />} />
+          <Route path='/cart' element={<Cart />} />
         </Route>
       </Routes>
       <Footer />

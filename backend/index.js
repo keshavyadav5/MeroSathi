@@ -27,7 +27,7 @@ app.use('/api/admin', adminRoute)
 app.use('/api/user', cart)
 
 const port = process.env.PORT || 3000;
-app.listen(3000, () => {
+app.listen(port, () => {
   db()
   console.log('Server is running on port 3000');
 })

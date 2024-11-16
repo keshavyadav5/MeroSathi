@@ -18,6 +18,7 @@ import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { signinFailed, signinStart, signinSuccess } from '@/redux/AuthSlice';
 import { toast } from 'react-toastify';
+import { addCartProduct } from '@/redux/Cartslice';
 
 const formSchema = z.object({
   email: z.string().email({ message: "Invalid email address." }),
@@ -55,6 +56,14 @@ const Login = () => {
         dispatch(signinSuccess(response.data));
         setLoading(false)
         toast.success(response.data.message)
+
+        if (response?.data?.user?.role === 'user') {
+          const cartData = await axios.get('http://localhost:3000/api/user/getAll-cart-items', {
+            withCredentials: true,
+          });
+
+          dispatch(addCartProduct(cartData.data));
+        }
         navigate('/');
       }
     } catch (error) {

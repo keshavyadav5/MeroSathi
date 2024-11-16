@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const Cart = ({ item }) => {
+const Card = ({ item }) => {
   const { currentUser } = useSelector(state => state.user);
   const navigate = useNavigate()
 
@@ -13,7 +13,7 @@ const Cart = ({ item }) => {
       return;
     }
     if (item?.category === "paper-product" && currentUser) {
-      navigate(`/print-paper-product/${item?.subcategory}`)
+      navigate(`/print-paper-product/${item?.category}/${item?.subcategory}/${item?.name}`)
     } else {
       navigate('auth/signin')
     }
@@ -34,4 +34,4 @@ const Cart = ({ item }) => {
   )
 }
 
-export default Cart
+export default Card
