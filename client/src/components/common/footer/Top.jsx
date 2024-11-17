@@ -28,11 +28,11 @@ const Top = () => {
         </p>
         <div className='flex flex-col gap-1'>
           <div className='flex items-center gap-3'>
-            <PhoneCallIcon className='text-[#008c3e]' />
+            <PhoneCallIcon className='text-[#894fb6]' />
             <p>(+91) 4345239810</p>
           </div>
           <div className='flex items-center gap-3'>
-            <MailIcon className='text-[#008c3e]' />
+            <MailIcon className='text-[#894fb6]' />
             <a href='mailto:kesavyadav992@gmail.com' className='hover:underline'>
               meroemail@gmail.com
             </a>
@@ -41,27 +41,27 @@ const Top = () => {
       </div>
 
       <div>
-        <h2 className='text-xl font-bold text-[#008c3e] sm:mb-4 mb-1'>Useful Links</h2>
+        <h2 className='text-xl font-bold text-[#533d64] sm:mb-4 mb-1'>Useful Links</h2>
         {usefulLink.map((data, index) => (
           <Link key={index} to={data.link} className='flex items-center gap-1 py-1'>
-            <GrFormNext className='text-[#008c3e] text-xl' />
+            <GrFormNext className='text-[#894fb6] text-xl' />
             {data.name}
           </Link>
         ))}
       </div>
 
       <div>
-        <h2 className='text-xl font-bold text-[#008c3e] sm:mb-4 mb-1'>Support</h2>
+        <h2 className='text-xl font-bold text-[#533d64] sm:mb-4 mb-1'>Support</h2>
         {support.map((data, index) => (
           <Link key={index} to={data.link} className='flex items-center gap-1 py-1'>
-            <GrFormNext className='text-[#008c3e] text-xl' />
+            <GrFormNext className='text-[#894fb6] text-xl' />
             {data.name}
           </Link>
         ))}
       </div>
 
       <div>
-        <h2 className='text-xl font-bold text-[#008c3e] sm:mb-4 mb-1'>Other Info</h2>
+        <h2 className='text-xl font-bold text-[#533d64] sm:mb-4 mb-1'>Other Info</h2>
         <p className='mb-4'>
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quaerat iure commodi modi laborum placeat aperiam impedit rem iusto doloribus minus tempore optio aliquid voluptas, soluta nulla enim est maxime!
         </p>

@@ -25,7 +25,7 @@ const Dashboard = () => {
             <Link
               key={item.id}
               to={item.slug}
-              className={`block w-full text-lg p-2 bg-green-50 rounded-sm ${activeLink === item.slug ? 'bg-green-500 text-white' : 'hover:bg-green-300'
+              className={`block w-full text-lg p-2 bg-[#e3befe] rounded-sm ${activeLink === item.slug ? 'bg-[#b56aef] text-white' : 'hover:bg-[#cca5e8]'
                 }`}
             >
               {item.name}

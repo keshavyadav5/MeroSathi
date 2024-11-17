@@ -90,7 +90,7 @@ const Login = () => {
               <img src={logo} alt="logo" className='w-full h-full rounded-sm' />
             </div>
             <h2 className='text-xl sm:text-3xl py-2 font-bold text-slate-600'>Signin to Your Account</h2>
-            <p className='text-sm text-slate-600'>Don't have an account? <Link to='/auth/signup' className='text-green-800 hover:underline ml-1'>Signup</Link></p>
+            <p className='text-sm text-slate-600'>Don't have an account? <Link to='/auth/signup' className='text-[#894fb6] hover:underline ml-1'>Signup</Link></p>
           </div>
           <div className='w-full md:max-w-[450px] items-end'>
             <Form {...form}>
@@ -122,7 +122,7 @@ const Login = () => {
                   )}
                 />
                 {error && <span className='text-red-600 text-sm'>{error}</span>}
-                <Button type="submit" className='w-full bg-[#008c3e] hover:bg-[#12743e]' disabled={loading}>
+                <Button type="submit" className='w-full bg-[#894fb6] hover:bg-[#6c4987]' disabled={loading}>
                   {loading ? <span className="spinner-border spinner-border-sm mr-2"></span> : null}
                   {loading ? "Submitting..." : "Submit"}
                 </Button>

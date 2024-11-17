@@ -206,7 +206,7 @@ const Total_product = () => {
             </div>
           </div>
 
-          <div className='bg-green-100 my-4 py-2 rounded-md px-2 pr-2 flex items-center justify-between'>
+          <div className='bg-[#e3befe] my-4 py-2 rounded-md px-2 pr-2 flex items-center justify-between'>
             <button
               className='cursor-pointer text-slate-700 hover:text-red-600 font-bold'
               onClick={() => navigate('/admin/dashboard/users')}
@@ -237,14 +237,14 @@ const Total_product = () => {
               <img src={item?.image} alt="" className='w-20 h-20' />
               <div className='flex-1 flex justify-between items-end pl-4'>
                 <div>
-                  <h3 className='font-bold text-sm text-[#008c3e]'>{item?.name}</h3>
+                  <h3 className='font-bold text-sm text-[#894fb6]'>{item?.name}</h3>
                   <p className='text-sm'>Category: {item.category}</p>
                   <p className='text-sm'>Subcategory: {item.subcategory}</p>
                   <p className='text-sm'>Price: {item.price}</p>
                 </div>
                 <div className='text-center flex gap-4'>
                   <MdEditDocument
-                    className='w-6 h-6 cursor-pointer text-[#008c3e] hover:text-[#2ba261] transition-all duration-300'
+                    className='w-6 h-6 cursor-pointer text-[#894fb6] hover:text-[#2ba261] transition-all duration-300'
                     onClick={() => {
                       {
                         setSelectEditId(item?._id);

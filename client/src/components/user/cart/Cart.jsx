@@ -13,7 +13,7 @@ const Cart = () => {
         withCredentials: true,
       });
       console.log(response);
-      
+
       const cartData = response.data
       dispatch(addCartProduct(cartData));
     } catch (error) {
@@ -26,9 +26,18 @@ const Cart = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Cart</h2>
+    <div className='px-4 sm:px-20 py-7'>
+      <div>
+        {/** left the cart items */}
+        <div>
+          
+        </div>
 
+        {/** right total price */}
+        <div>
+
+        </div>
+      </div>
     </div>
   );
 };

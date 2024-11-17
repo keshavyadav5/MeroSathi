@@ -126,7 +126,7 @@ const Total_user = () => {
             </div>
           </div>
 
-          <div className='bg-green-100 my-4 py-2 rounded-md px-2 flex items-center justify-between'>
+          <div className='bg-[#e3befe] my-4 py-2 rounded-md px-2 flex items-center justify-between'>
             <button
               className='cursor-pointer text-slate-700 hover:text-red-600 font-bold'
               onClick={() => navigate('/admin/dashboard/products')}

@@ -74,7 +74,7 @@ const Contact = () => {
         {/* Left- contact info */}
         <div className='flex-1'>
           <div className='mb-10'>
-            <PulsatingButton className='cursor-auto bg-gradient-to-tr from-green-500 to-blue-950 mb-5'>
+            <PulsatingButton className='cursor-auto bg-gradient-to-tr from-[#894fb6] to-blue-950 mb-5'>
               Contact us
             </PulsatingButton>
             <h1 className='mt-6 mb-2 text-2xl sm:text-3xl font-bold uppercase text-dark dark:text-white sm:text-[40px] lg:text-[36px] xl:text-[32px]'>
@@ -87,28 +87,28 @@ const Contact = () => {
           <div className='space-y-5'>
             <div className='flex items-center gap-5'>
               <div className='h-16 w-16 bg-slate-200 flex items-center justify-center'>
-                <Home className='text-2xl text-[#008c3e] font-bold' />
+                <Home className='text-2xl text-[#894fb6] font-bold' />
               </div>
               <div>
-                <h1 className='font-bold text-xl text-[#008c3e]'>Address</h1>
+                <h1 className='font-bold text-xl text-[#894fb6]'>Address</h1>
                 <p>123 Main St, Anytown, USA 12345</p>
               </div>
             </div>
             <div className='flex items-center gap-5'>
               <div className='h-16 w-16 bg-slate-200 flex items-center justify-center'>
-                <PhoneCall className='text-2xl text-[#008c3e] font-bold' />
+                <PhoneCall className='text-2xl text-[#894fb6] font-bold' />
               </div>
               <div>
-                <h1 className='font-bold text-xl text-[#008c3e]'>Contact Number</h1>
+                <h1 className='font-bold text-xl text-[#894fb6]'>Contact Number</h1>
                 <p>(+91)4982424135</p>
               </div>
             </div>
             <div className='flex items-center gap-5'>
               <div className='h-16 w-16 bg-slate-200 flex items-center justify-center'>
-                <MailCheck className='text-2xl text-[#008c3e] font-bold' />
+                <MailCheck className='text-2xl text-[#894fb6] font-bold' />
               </div>
               <div>
-                <h1 className='font-bold text-xl text-[#008c3e]'>Email</h1>
+                <h1 className='font-bold text-xl text-[#894fb6]'>Email</h1>
                 <p>meroemail@gmail.com</p>
               </div>
             </div>
@@ -189,13 +189,13 @@ const Contact = () => {
                   <span className='text-green-900'>{result}</span>
 
                 </div>
-                <Button type="submit" className='w-full bg-[#008c3e] hover:bg-[#12743e]'>Submit</Button>
+                <Button type="submit" className='w-full bg-[#894fb6] hover:bg-[#994ad5]'>Submit</Button>
               </form>
             </Form>
           </div>
 
           {/* Background circle behind form */}
-          <div className='absolute sm:-top-14 -top-5 -right-3 sm:-right-14 w-12 sm:w-32 h-12 sm:h-32 bg-[#008c3e] rounded-full -z-30'></div>
+          <div className='absolute sm:-top-14 -top-5 -right-3 sm:-right-14 w-12 sm:w-32 h-12 sm:h-32 bg-[#894fb6] rounded-full -z-30'></div>
         </div>
       </div>
     </div>

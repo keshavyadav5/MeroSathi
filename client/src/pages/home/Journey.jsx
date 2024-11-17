@@ -80,27 +80,27 @@ const Journey = () => {
 
         <button
           onClick={() => setExpanded(!expanded)}
-          className='text-[#008c3e] font-semibold mt-4'
+          className='text-[#894fb6] font-semibold mt-4'
         >
           {expanded ? '...See Less' : '...See More'}
         </button>
       </div>
 
       <div className='my-20 sm:grid flex flex-col gap-4 sm:grid-cols-2 lg:grid-cols-4 items-center'>
-        <div className='py-3 border-2 w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col border-[#39cf7d] '>
-          <h2 className='text-[#008c3e] text-2xl py-1 font-bold'>1M+</h2>
+        <div className='py-3 border-2 w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col border-[#894fb6] '>
+          <h2 className='text-[#894fb6] text-2xl py-1 font-bold'>1M+</h2>
           <p className='text-md text-slate-600'>Happy Clients</p>
         </div>
-        <div className='py-4 border-2 w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col border-[#39cf7d] '>
-          <h2  className='text-[#008c3e] text-2xl py-1 font-bold'>10000+</h2>
+        <div className='py-4 border-2 w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col border-[#894fb6] '>
+          <h2  className='text-[#894fb6] text-2xl py-1 font-bold'>10000+</h2>
           <p className='text-slate-600'>Personalized Products</p>
         </div>
-        <div className='py-4 border-2 border-[#39cf7d] w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col'>
-          <h2  className='text-[#008c3e] text-2xl py-1 font-bold'>22 Years</h2>
+        <div className='py-4 border-2 border-[#894fb6] w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col'>
+          <h2  className='text-[#894fb6] text-2xl py-1 font-bold'>22 Years</h2>
           <p className='text-slate-600'>of Services Excellence</p>
         </div>
-        <div className='py-4 border-2 border-[#39cf7d] w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col'>
-          <h2  className='text-[#008c3e] text-2xl py-1 font-bold'>3+</h2>
+        <div className='py-4 border-2 border-[#894fb6] w-48 rounded-tr-3xl rounded-bl-3xl items-center flex  flex-col'>
+          <h2  className='text-[#894fb6] text-2xl py-1 font-bold'>3+</h2>
           <p className='text-slate-600'>Stores across The City</p>
         </div>
       </div>

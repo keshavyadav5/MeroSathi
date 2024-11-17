@@ -80,7 +80,7 @@ const Signup = () => {
           <div className='flex-1 flex flex-col gap-7'>
             <div>
               <h2 className='text-xl sm:text-3xl py-2 font-bold text-slate-600'>Create An Account</h2>
-              <p className='text-sm text-slate-600'>Already have an account? <Link to='/auth/signin' className='text-green-800 hover:underline ml-1'>Signin</Link></p>
+              <p className='text-sm text-slate-600'>Already have an account? <Link to='/auth/signin' className='text-[#894fb6] hover:underline ml-1'>Signin</Link></p>
             </div>
             <div className='w-full md:max-w-[450px]'>
               <Form {...form}>
@@ -184,7 +184,7 @@ const Signup = () => {
                     )}
                   />
                   <span className='text-red-600 text-sm'>{error}</span>
-                  <Button type="submit" className='w-full bg-[#008c3e] hover:bg-[#12743e]' disabled={loading}>
+                  <Button type="submit" className='w-full bg-[#894fb6] hover:bg-[#6c4987]' disabled={loading}>
                     {loading ? "Submitting..." : "Submit"}
                   </Button>
                 </form>

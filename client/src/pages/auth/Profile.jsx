@@ -138,7 +138,7 @@ const Profile = () => {
 
               <Button
                 type={!isUpdateInfo ? 'submit' : 'button'}
-                className='bg-[#008c3e] hover:bg-[#136939]'
+                className='bg-[#894fb6] hover:bg-[#7945a1]'
                 onClick={() => setIsUpdateInfo(!isUpdateInfo)}
               >
                 {isUpdateInfo ? <><SaveAll /> Save Changes</> : <> <Edit /> Edit Info</>}
@@ -185,7 +185,7 @@ const Profile = () => {
                 />
                 {passwordError && <span className='text-sm text-red-500'>{passwordError}</span>}
               </div>
-              <Button type='submit' className='bg-[#008c3e] hover:bg-[#136939]'><Save /> Save Changes</Button>
+              <Button type='submit' className='bg-[#894fb6] hover:bg-[#7945a1]'><Save /> Save Changes</Button>
             </form>
           </div>
         </div>

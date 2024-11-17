@@ -105,20 +105,20 @@ const Main = () => {
         <div className='flex justify-between flex-col md:flex-row items-center gap-4'>
           <div className='flex-1 w-full pb-5 md:pb-0'>
             <div className='pb-10'>
-              <h2 className='text-4xl md:text-3xl lg:text-4xl font-bold text-[#008c3e]'>It's Now Easy To Print</h2>
+              <h2 className='text-4xl md:text-3xl lg:text-4xl font-bold text-[#533d64]'>It's Now Easy To Print</h2>
               <h3 className='text-md pt-2'>You can print anything by sitting in your home</h3>
             </div>
             <div className='flex flex-col gap-4'>
               {topData.map((item, index) => (
                 <div key={index} className="flex gap-4 items-center">
-                  <div className='w-12 h-12 bg-[#8ae3b2] flex items-center justify-center rounded-full'>
-                    <div>{React.createElement(item.iconSrcUrl, { className: 'text-gray-600' })}</div>
+                  <div className='w-12 h-12 bg-[#894fb6] flex items-center justify-center rounded-full'>
+                    <div>{React.createElement(item.iconSrcUrl, { className: 'text-white' })}</div>
                   </div>
                   <div className="flex flex-col justify-center">
-                    <h4 className="font-semibold md:text-[18px] text-[14px] text-gray-800 transition-colors duration-300 hover:text-green-600">
+                      <h4 className="font-semibold md:text-[18px] text-[14px] text-gray-800 transition-colors duration-300 hover:text-[#894fb6]">
                       {item.heading}
                     </h4>
-                    <p className="md:text-sm text-[12px] text-gray-600 transition-colors duration-300 hover:text-green-500">
+                    <p className="md:text-sm text-[12px] text-gray-600 transition-colors duration-300 hover:text-[#894fb6]">
                       {item.description}
                     </p>
                   </div>
@@ -140,22 +140,22 @@ const Main = () => {
 
           <div className='w-full md:w-1/2 flex flex-col ites md:items-end'>
             <div className='pb-10 text-right'>
-              <h2 className='text-4xl font-bold text-[#008c3e]'>Customize your prints</h2>
+              <h2 className='text-4xl font-bold text-[#533d64]'>Customize your prints</h2>
               <h3 className='text-md pt-2'>Explore a wide range of customization options to perfect your order.</h3>
             </div>
             <div className='flex flex-col gap-4 items-end pb-5 md:pb-0'>
               {downData.map((item, index) => (
                 <div key={index} className="flex gap-4 items-center text-right">
                   <div className="flex flex-col justify-center">
-                    <h4 className="font-semibold md:text-[18px] text-[14px] text-gray-800 transition-colors duration-300 hover:text-green-600">
+                    <h4 className="font-semibold md:text-[18px] text-[14px] text-gray-800 transition-colors duration-300 hover:text-[#894fb6]">
                       {item.heading}
                     </h4>
-                    <p className="md:text-sm text-[12px] text-gray-600 transition-colors duration-300 hover:text-green-500">
+                    <p className="md:text-sm text-[12px] text-gray-600 transition-colors duration-300 hover:text-[#894fb6]">
                       {item.description}
                     </p>
                   </div>
-                  <div className='w-12 h-12 bg-[#8ae3b2] flex items-center justify-center rounded-full'>
-                    {React.createElement(item.iconSrcUrl, { className: 'text-gray-600' })}
+                  <div className='w-12 h-12 bg-[#894fb6] flex items-center justify-center rounded-full'>
+                    {React.createElement(item.iconSrcUrl, { className: 'text-white' })}
                   </div>
                 </div>
               ))}

@@ -6,14 +6,14 @@ import { cn } from "@/lib/utils";
 export default function PulsatingButton({
   className,
   children,
-  pulseColor = "#50ffaf",
+  pulseColor = "#e3befe",
   duration = "2s",
   ...props
 }) {
   return (
     (<button
       className={cn(
-        "relative text-center cursor-pointer flex justify-center items-center rounded-lg text-white dark:text-black bg-green-500 dark:bg-blue-500 px-4 py-2",
+        "relative text-center cursor-pointer flex justify-center items-center rounded-lg text-white dark:text-black bg-[#894fb6] dark:bg-blue-500 px-4 py-2",
         className
       )}
       style={

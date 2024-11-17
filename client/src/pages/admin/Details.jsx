@@ -26,7 +26,7 @@ const Details = () => {
         {/** Admin photo and role  */}
         {
           showAdminName && <div className='relative'>
-            <div className='flex justify-between bg-green-100 items-center rounded-xl px-12 py-1'>
+            <div className='flex justify-between bg-[#e3befe] items-center rounded-xl px-12 py-1'>
               <div>
                 <h2 className='text-3xl font-bold font-mono'>Hi, {user}</h2>
                 <p>Ready to start your day with some pitch desk?</p>
