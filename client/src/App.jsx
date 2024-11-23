@@ -71,7 +71,7 @@ const App = () => {
         </Route>
       </Routes>
       <Footer />
-      <ToastContainer position="top-right" autoClose={1200} />
+      <ToastContainer position="top-right" autoClose={1000} />
     </>
   ) : <>
     <Loading isLoading={isLoading} />

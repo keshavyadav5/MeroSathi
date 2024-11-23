@@ -21,6 +21,7 @@ const UploadpaperproductDetails = () => {
     category: '',
     subcategory: '',
     imageUrl: '',
+    productname: '',
     name: '',
     size: '',
     format: '',
@@ -51,6 +52,7 @@ const UploadpaperproductDetails = () => {
         format: files.format,
         pages: files.pages,
         subcategory: files.subcategory,
+        productname: files.productname,
         price: response?.data?.paperProducts[0]?.price || 0,
       }));
     } catch (error) {
@@ -62,7 +64,7 @@ const UploadpaperproductDetails = () => {
     setOtherData();
   }, [files]);
 
-  const total = paperProductPriceCalculation(uploadData);
+  const data = paperProductPriceCalculation(uploadData);
 
 
   // add to cart 
@@ -89,29 +91,32 @@ const UploadpaperproductDetails = () => {
   const handleAddToCart = async () => {
     try {
       const respose = await axios.post(`${import.meta.env.VITE_BACKEND_URI}/api/user/add-cart-paperproduct`, {
-        category : uploadData.category,
-        subcategory : uploadData.subcategory,
-        imageUrl : "imgurl",
-        price : uploadData.price,
-        name : uploadData.name,
-        description : uploadData.description,
-        pages : uploadData.pages,
-        copy : uploadData.copy,
-        size : uploadData.size,
-        format : uploadData.format,
-        papersize : uploadData.papersize,
-        papertype : uploadData.papertype,
-        binding : uploadData.binding,
-        printingside : uploadData.printingside,
-        orientation : uploadData.orientation,
-        printcolor : uploadData.printcolor,
+        category: uploadData.category,
+        subcategory: uploadData.subcategory,
+        imageUrl: "imgurl",
+        price: uploadData.price,
+        name: uploadData.name,
+        description: uploadData.description,
+        pages: uploadData.pages,
+        copy: uploadData.copy,
+        size: uploadData.size,
+        format: uploadData.format,
+        papersize: uploadData.papersize,
+        papertype: uploadData.papertype,
+        binding: uploadData.binding,
+        printingside: uploadData.printingside,
+        orientation: uploadData.orientation,
+        printcolor: uploadData.printcolor,
+        productname: uploadData.productname
       }, {
         withCredentials: true
       })
-     if(respose.data.success){
-      toast.success('Paper product added to cart');
-      navigate('/cart')
-     }
+      if (respose.data.success) {
+        toast.success('Paper product added to cart');
+        // console.log("respose", respose);
+
+        navigate('/cart')
+      }
 
     } catch (error) {
       toast.error(error?.response?.data?.message || "not able to add to cart")
@@ -324,11 +329,11 @@ const UploadpaperproductDetails = () => {
           <p>Print Cost : Rs <span className='font-bold text-[#533d64]'>{uploadData.price}</span> /page</p>
 
           <h3 className='mt-4 text-xl font-semibold'>
-            Total Amount : Rs <span className='text-green-800'>{`${total.toFixed(2)}`}</span>
+            Total Amount : Rs <span className='text-green-800'>{`${data?.totalPrice.toFixed(2)}`}</span>
           </h3>
 
           <Button
-            className='mt-4 bg-[#533d64]'
+            className='mt-4 bg-[#533d64] hover:bg-[#7c519b]'
             onClick={handleAddToCart}
           >Add Cart</Button>
         </div>

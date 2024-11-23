@@ -8,11 +8,30 @@ import Marque from './Marque';
 import Journey from './Journey';
 import { UploadIcon } from '@radix-ui/react-icons';
 import { GrDeliver } from 'react-icons/gr';
+import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { addCartProduct } from '@/redux/Cartslice';
 
 
 
 const Main = () => {
   const typedElement = useRef(null);
+  const dispatch = useDispatch();
+  const { currentUser } = useSelector(state => state.user || {});
+
+  const getAllCartData = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_BACKEND_URI}/api/user/getAll-cart-items`,
+        { withCredentials: true }
+      );
+      if (currentUser && response.data.success) {
+        dispatch(addCartProduct(response.data));
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
 
   const topData = [
     {
@@ -44,7 +63,7 @@ const Main = () => {
       description: "Easily upload your files in a few clicks.",
     },
     {
-      iconSrcUrl:FileChartPieIcon,
+      iconSrcUrl: FileChartPieIcon,
       heading: "Enhanced Customization",
       description: "Select options that best suit your printing needs.",
     },
@@ -61,6 +80,7 @@ const Main = () => {
   ];
 
   useEffect(() => {
+    getAllCartData()
     const typed = new Typed(typedElement.current, {
       strings: ['pdf', 'documents', 'cards', 'shirts'],
       typeSpeed: 60,
@@ -115,7 +135,7 @@ const Main = () => {
                     <div>{React.createElement(item.iconSrcUrl, { className: 'text-white' })}</div>
                   </div>
                   <div className="flex flex-col justify-center">
-                      <h4 className="font-semibold md:text-[18px] text-[14px] text-gray-800 transition-colors duration-300 hover:text-[#894fb6]">
+                    <h4 className="font-semibold md:text-[18px] text-[14px] text-gray-800 transition-colors duration-300 hover:text-[#894fb6]">
                       {item.heading}
                     </h4>
                     <p className="md:text-sm text-[12px] text-gray-600 transition-colors duration-300 hover:text-[#894fb6]">

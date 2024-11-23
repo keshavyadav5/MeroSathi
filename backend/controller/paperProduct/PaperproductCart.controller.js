@@ -18,8 +18,8 @@ const paperProductCart = async (req, res) => {
     printingside,
     orientation,
     printcolor,
+    productname,
   } = req.body;
-console.log(req.body);
 
   const role = req.role;
   const id = req.id;
@@ -38,6 +38,7 @@ console.log(req.body);
         size,
         format,
         description,
+        productname
       },
       pricing: {
         price,
@@ -58,14 +59,14 @@ console.log(req.body);
     } else {
       const existingProduct = cart.products.find(
         (p) =>
-          p.details.name === product.details.name &&
+          p.details.productname === product.details.productname &&
           p.details.category === product.details.category &&
           p.details.subcategory === product.details.subcategory
       );
 
-      if (existingProduct) {
-        return res.status(400).json({ success: false, message: 'Product already in cart' });
-      }
+      // if (existingProduct) {
+      //   return res.status(400).json({ success: false, message: 'Product already in cart better increase copy of it' });
+      // }
 
       cart.products.push(product);
       await cart.save();

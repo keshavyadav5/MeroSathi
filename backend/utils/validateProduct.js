@@ -18,6 +18,7 @@ const productSchema = Joi.object({
   printingside: Joi.string().optional(),
   orientation: Joi.string().optional(),
   printcolor: Joi.string().optional(),
+  productname: Joi.string().required(),
 });
 
 const validateProduct = (req, res, next) => {

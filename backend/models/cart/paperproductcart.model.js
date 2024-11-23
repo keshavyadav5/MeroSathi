@@ -35,6 +35,9 @@ const paperProductCartSchema = new mongoose.Schema({
         type: String,
         default: "",
       },
+      productname : {
+        type: String,
+      }
     },
 
     pricing: {

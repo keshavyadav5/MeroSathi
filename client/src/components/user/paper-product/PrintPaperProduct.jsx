@@ -119,7 +119,10 @@ const PaperProductFileUpload = () => {
     setLoading(true);
     try {
       const filesWithSubcategory = filesToUpload.map((file) => ({
-        ...file,
+        productname: files[0].name,
+        fomat: files[0].format,
+        pages: files[0].pages,
+        size: files[0].size,
         progress: 100,
         status: "completed",
         category: params.category,
