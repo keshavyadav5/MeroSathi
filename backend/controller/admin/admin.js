@@ -1,4 +1,5 @@
 const Paperproduct = require('../../models/paperproduct.model');
+const Product = require('../../models/product.model');
 const User = require('../../models/user.model');
 
 const getAllUser = async (req, res) => {
@@ -37,32 +38,46 @@ const getAllUser = async (req, res) => {
   }
 };
 
+
 const getAllProducts = async (req, res) => {
   const { page = 1, limit = 10, search = '', sort = 'name' } = req.query;
-  const role = req.role;
+
   const query = search
     ? {
-      $or: [
-        { name: { $regex: search, $options: 'i' } },
-        { category: { $regex: search, $options: 'i' } },
-        { subcategory: { $regex: search, $options: 'i' } },
-      ],
-    }
+        $or: [
+          { name: { $regex: search, $options: 'i' } },
+          { category: { $regex: search, $options: 'i' } },
+          { subcategory: { $regex: search, $options: 'i' } },
+        ],
+      }
     : {};
 
   try {
-    const paperProducts = await Paperproduct.find(query)
+    const productQuery = Product.find(query)
       .sort(sort)
       .skip((page - 1) * limit)
       .limit(parseInt(limit));
 
-    const totalProducts = await Paperproduct.countDocuments(query);
+    const paperProductQuery = Paperproduct.find(query)
+      .sort(sort)
+      .skip((page - 1) * limit)
+      .limit(parseInt(limit));
+
+    const [products, paperProducts] = await Promise.all([productQuery, paperProductQuery]);
+
+    const totalProductCount = await Product.countDocuments(query);
+    const totalPaperProductCount = await Paperproduct.countDocuments(query);
+    const totalCount = totalProductCount + totalPaperProductCount;
+
     return res.status(200).json({
       success: true,
       message: "Products fetched successfully",
-      paperProducts,
+      data: {
+        products,
+        paperProducts,
+      },
       pagination: {
-        total: totalProducts,
+        total: totalCount,
         page: parseInt(page),
         limit: parseInt(limit),
       },
@@ -71,6 +86,7 @@ const getAllProducts = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 module.exports = {
   getAllUser,

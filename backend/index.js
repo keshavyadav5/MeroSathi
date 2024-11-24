@@ -6,7 +6,7 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 dotenv.config();
 const authRouter = require('./routes/auth.route')
-const paperProduct = require('./routes/product.route')
+const product = require('./routes/product.route')
 const adminRoute = require('./routes/admin')
 const cart = require('./routes/user.route')
 
@@ -22,7 +22,7 @@ app.use(express.json());
 
 
 app.use('/api/auth', authRouter)
-app.use('/api', paperProduct)
+app.use('/api', product)
 app.use('/api/admin', adminRoute)
 app.use('/api/user', cart)
 
