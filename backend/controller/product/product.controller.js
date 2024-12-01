@@ -4,28 +4,32 @@ const uploadProduct = async (req, res) => {
   const { category, name, subcategory, price, images, description, stock, status, type } = req.body;
   const { role } = req;
 
+  if (role !== 'admin') {
+    return res.status(401).json({ success: false, message: 'Unauthorized' });
+  }
+
+  if (!category || !name || !subcategory || !price || !images || !description || !type) {
+    return res.status(400).json({ success: false, message: 'All fields are required.' });
+  }
+
+  if (!Array.isArray(images) || images.length < 1 || images.length > 4) {
+    return res.status(400).json({ success: false, message: 'You must upload between 1 and 4 images.' });
+  }
+
+  if (price < 20) {
+    return res.status(400).json({ success: false, message: 'Price must be at least 20.' });
+  }
+
   try {
-    if (role !== 'admin') {
-      return res.status(401).json({ success: false, message: 'Unauthorized' });
-    }
-
-    if (!category || !name || !subcategory || !price || !images || !description || !type) {
-      return res.status(400).json({ success: false, message: 'All fields are required' });
-    }
-
-    if (price < 20) {
-      return res.status(400).json({ success: false, message: 'Price must be greater than 20' });
-    }
-
     const isAvailable = await Product.findOne({ name, category, subcategory });
     if (isAvailable) {
-      return res.status(400).json({ success: false, message: 'Product already exists' });
+      return res.status(400).json({ success: false, message: 'Product already exists.' });
     }
 
     const product = new Product({ category, name, subcategory, price, images, description, stock, status, type });
     const savedProduct = await product.save();
 
-    return res.status(201).json({ success: true, message: 'Product created successfully', data: savedProduct });
+    return res.status(201).json({ success: true, message: 'Product created successfully.', data: savedProduct });
   } catch (error) {
     return res.status(500).json({ success: false, message: error.message });
   }

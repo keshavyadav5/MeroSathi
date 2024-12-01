@@ -86,14 +86,17 @@ const Header = () => {
       </div>
 
       <div className="flex-1 flex gap-4 justify-end items-center">
-        <Link to="/cart">
-          <div className="relative py-2">
-            <span className="absolute top-2 left-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
-              {cartCount}
-            </span>
-            <ShoppingCartIcon className="w-6 h-6 mt-4" />
-          </div>
-        </Link>
+        {
+          currentUser && currentUser?.user?.role === 'user' &&
+          <Link to="/cart">
+            <div className="relative py-2">
+              <span className="absolute top-2 left-1 flex h-4 w-4 items-center justify-center rounded-full bg-red-500 text-xs text-white">
+                {cartCount}
+              </span>
+              <ShoppingCartIcon className="w-6 h-6 mt-4" />
+            </div>
+          </Link>
+        }
         <DropdownMenu>
           <DropdownMenuTrigger className="flex items-center outline-none">
             <CircleUserRound className="w-8 h-8 mt-2" />

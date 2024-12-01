@@ -26,6 +26,7 @@ import Total_product from './pages/admin/total-user-products/Total_product'
 import Total_user from './pages/admin/total-user-products/Total_user'
 import UploadpaperproductDetails from './components/user/paper-product/UploadpaperproductDetails'
 import Cart from './components/user/cart/Cart'
+import UploadProduct from './pages/admin/UploadProduct'
 
 
 const App = () => {
@@ -59,6 +60,7 @@ const App = () => {
                 <Route path='users' element={<Total_user />} />
               </Route>
               <Route path='upload-paper-product' element={<UploadPaperProduct />} />
+              <Route path='upload-product' element={<UploadProduct />} />
             </Route>
           </Route>
 

@@ -1,4 +1,4 @@
-import { useDeletePaperProductMutation, useUpdatePaperProductMutation } from '@/redux/Postslice'
+import { paperProductApi, useDeletePaperProductMutation, useDeleteProductMutation, useUpdatePaperProductMutation, useUpdateProductMutation } from '@/redux/Postslice'
 import React, { useEffect, useRef, useState } from 'react'
 import { BsFilePdfFill } from "react-icons/bs";
 import { Delete, Search } from 'lucide-react'
@@ -42,32 +42,35 @@ const Total_product = () => {
 
   const [search, setSearch] = useState('');
   const [page, setPage] = useState(1);
-  const [getAllProducts, setGetAllPaperProducts] = useState([]);
+  const [getAllProducts, setGetAllProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showDeleteOption, setShowDeleteOption] = useState(false);
   const [showEditOption, setShowEditOption] = useState(false)
   const [toDeleteSelectedId, setToDeleteSelectedId] = useState(null)
+  const [showMore, setShowMore] = useState(false)
 
   const [selectEditId, setSelectEditId] = useState(null);
   const [selectCategory, setSelectCategory] = useState(null)
 
+  const [expandedItems, setExpandedItems] = useState({}); // Track expanded state for each item
+
+  const toggleExpand = (id) => {
+    setExpandedItems((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   const navigate = useNavigate();
   const cardRef = useRef(null);
-
-  // const { data: getAllProducts, error, isLoading, refetch } = useGetAllPaperProductQuery(
-  //   { page, search },
-  //   { refetchOnMountOrArgChange: true }
-  // );
 
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
     setPage(1);
   };
 
-  // useEffect(() => {
-  //   refetch();
-  // }, [search, page, refetch]);
+
 
   const AllProduct = async () => {
     try {
@@ -77,7 +80,7 @@ const Total_product = () => {
 
       if (response?.data?.success) {
 
-        setGetAllPaperProducts(response?.data?.paperProducts)
+        setGetAllProducts(response?.data?.data);
       }
 
     } catch (error) {
@@ -91,7 +94,7 @@ const Total_product = () => {
   }, [search, page, toDeleteSelectedId])
 
 
-  // --------------------------  Handle Delete paperProduct -------------------------------------
+  // --------------------------  Handle Delete Product -------------------------------------
   const handleDeletePaperProduct = async (id) => {
     try {
       const response = await deletePaperProduct(id).unwrap();
@@ -107,9 +110,29 @@ const Total_product = () => {
     }
   };
 
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const response = await deleteProduct(productId).unwrap();
+
+      if (response?.success) {
+        toast.success(response?.message)
+        AllProduct()
+      }
+
+    } catch (error) {
+      toast.error(error.response.data.message)
+    } finally {
+      setShowDeleteOption(!showDeleteOption)
+    }
+  }
+
   const [deletePaperProduct] = useDeletePaperProductMutation({
     refetchOnMountOrArgChange: true,
   });
+  const [deleteProduct] = useDeleteProductMutation({
+    refetchOnMountOrArgChange: true,
+  })
 
 
   // --------------------------  Handle Update paperProduct -------------------------------------
@@ -128,7 +151,6 @@ const Total_product = () => {
       [id]: value
     }));
   };
-
 
   // console.log(formDataPaperProduct, selectEditId);
   const [updatePaperProduct] = useUpdatePaperProductMutation({
@@ -157,6 +179,49 @@ const Total_product = () => {
   };
 
 
+
+  const [formDataProduct, setFormDataProduct] = useState({
+    name: "",
+    status: "",
+    price: 20,
+    stock: 0,
+    type: ""
+  })
+
+  const selectOptionForProduct = (e) => {
+    const { id, value } = e.target || e;
+    setFormDataProduct((prevData) => ({
+      ...prevData,
+      [id]: value
+    }));
+  }
+
+  const [updateProduct] = useUpdateProductMutation({
+    refetchOnMountOrArgChange: true,
+  })
+
+
+  const handleUpdateProduct = async () => {
+    try {
+      const response = await updateProduct({ body: formDataProduct, productId: selectEditId }).unwrap();
+
+      if (response?.success) {
+        toast.success('Product updated successfully!');
+        AllProduct();
+      }
+    } catch (error) {
+      toast.error(error?.response?.data.message || "Failed to update")
+    } finally {
+      setFormDataProduct({
+        name: "",
+        status: "",
+        price: 20,
+        stock: 0,
+        type: ""
+      })
+      setShowEditOption(!showEditOption);
+    }
+  }
 
 
   return (
@@ -241,6 +306,23 @@ const Total_product = () => {
                   <p className='text-sm'>Category: {item.category}</p>
                   <p className='text-sm'>Subcategory: {item.subcategory}</p>
                   <p className='text-sm'>Price: {item.price}</p>
+                  {expandedItems[item._id] && (
+                  <div>
+                    <p className="text-sm">Status: {item.status}</p>
+                    {item.category !== 'paper-product' && (
+                      <div>
+                        <p className="text-sm">Stock: {item.stock}</p>
+                        <p className="text-sm">Type: {item.type}</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                  <button
+                  className="text-[#894fb6] cursor-pointer"
+                  onClick={() => toggleExpand(item._id)}
+                >
+                  {expandedItems[item._id] ? '...see less' : '...see more'}
+                </button>
                 </div>
                 <div className='text-center flex gap-4'>
                   <MdEditDocument
@@ -286,7 +368,9 @@ const Total_product = () => {
                   >Cancel</Button>
                   <Button
                     className='bg-red-700 text-white hover:bg-red-600'
-                    onClick={() => handleDeletePaperProduct(toDeleteSelectedId)}
+                    onClick={() => selectCategory === 'paper-product'
+                      ? handleDeletePaperProduct(toDeleteSelectedId)
+                      : handleDeleteProduct(toDeleteSelectedId)}
                   >
                     Delete
                   </Button>
@@ -377,6 +461,91 @@ const Total_product = () => {
                   <Button
                     className='text-white bg-[#008c3e] hover:bg-[#157540] hover:text-white'
                     onClick={handleUpdatePaperProduct}
+                  >Update</Button>
+                </CardFooter>
+              </Card>
+            </div>
+          }
+
+          {/** to update other product except paper product */}
+          {
+            showEditOption && selectCategory !== 'paper-product' &&
+            <div className='absolute top-40 right-80 left0 bottom-0'>
+              <Card className="w-[350px]" ref={cardRef}>
+                <CardHeader>
+                  <CardTitle className='text-xl font-bold'>Update Product</CardTitle>
+                  <CardDescription>It will permanently update your product catlog.</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <form>
+                    <div className="grid w-full items-center gap-4">
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="name">Name</Label>
+                        <Input
+                          id="name"
+                          placeholder="Name of your product"
+                          value={formDataProduct.name}
+                          onChange={selectOptionForProduct}
+                        />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="price">Stock</Label>
+                        <Input
+                          id="stock"
+                          placeholder="Price of your product"
+                          value={formDataProduct.price}
+                          onChange={selectOptionForProduct}
+                        />
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="subcategory">Types</Label>
+                        <Select id="type" value={formDataProduct.type} onValueChange={(value) => selectOptionForProduct({ target: { id: 'type', value } })}>
+
+                          <SelectTrigger
+                            id="type">
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent position="popper">
+                            <SelectItem value="clothes">Clothes</SelectItem>
+                            <SelectItem value="glass">Glass</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="status">Status</Label>
+                        <Select id="status" value={formDataProduct.status} onValueChange={(value) => selectOptionForProduct({ target: { id: 'status', value } })}>
+
+                          <SelectTrigger >
+                            <SelectValue placeholder="Select" />
+                          </SelectTrigger>
+                          <SelectContent position="popper" >
+                            <SelectItem value="uncharacteroized">Uncharacteroized</SelectItem>
+                            <SelectItem value="trending">Trending</SelectItem>
+                            <SelectItem value="newlaunched">New Launched</SelectItem>
+                            <SelectItem value="upcoming">Upcoming</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div className="flex flex-col space-y-1.5">
+                        <Label htmlFor="price">Price</Label>
+                        <Input
+                          id="price"
+                          placeholder="Price of your product"
+                          value={formDataProduct.price}
+                          onChange={selectOptionForProduct}
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </CardContent>
+                <CardFooter className="flex justify-between">
+                  <Button
+                    variant="outline"
+                    onClick={() => setShowEditOption(!showEditOption)}
+                  >Cancel</Button>
+                  <Button
+                    className='text-white bg-[#008c3e] hover:bg-[#157540] hover:text-white'
+                    onClick={handleUpdateProduct}
                   >Update</Button>
                 </CardFooter>
               </Card>

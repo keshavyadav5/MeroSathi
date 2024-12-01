@@ -14,7 +14,8 @@ const Dashboard = () => {
     { id: 2, name: "Users", slug: "/admin/dashboard/users", active: true },
     { id: 3, name: "Profile", slug: "/profile", active: true },
     { id: 4, name: "Upload Paper Product", slug: "/admin/dashboard/upload-paper-product", active: true },
-    { id: 5, name: "Settings", slug: "/settings", active: true },
+    { id: 5, name: "Upload Product", slug: "/admin/dashboard/upload-product", active: true },
+    { id: 6, name: "Settings", slug: "/settings", active: true },
   ];
 
   return (
@@ -25,7 +26,7 @@ const Dashboard = () => {
             <Link
               key={item.id}
               to={item.slug}
-              className={`block w-full text-lg p-2 bg-[#e3befe] rounded-sm ${activeLink === item.slug ? 'bg-[#b765f6] text-white' : 'hover:bg-[#cca5e8]'
+              className={`block w-full text-lg p-2 bg-[#e3befe] rounded-sm ${activeLink === item.slug ? ' bg-purple-600 text-white' : 'hover:bg-[#cca5e8]'
                 }`}
             >
               {item.name}

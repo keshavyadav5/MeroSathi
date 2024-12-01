@@ -53,17 +53,19 @@ const getAllProducts = async (req, res) => {
     : {};
 
   try {
-    const productQuery = Product.find(query)
-      .sort(sort)
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
-
-    const paperProductQuery = Paperproduct.find(query)
-      .sort(sort)
-      .skip((page - 1) * limit)
-      .limit(parseInt(limit));
+    const productQuery = Product.find(query).sort(sort);
+    const paperProductQuery = Paperproduct.find(query).sort(sort);
 
     const [products, paperProducts] = await Promise.all([productQuery, paperProductQuery]);
+
+    // Combine results and sort
+    const combinedResults = [...products, ...paperProducts].sort((a, b) =>
+      a[sort] > b[sort] ? 1 : -1
+    );
+
+    // Apply global pagination
+    const startIndex = (page - 1) * limit;
+    const paginatedResults = combinedResults.slice(startIndex, startIndex + parseInt(limit));
 
     const totalProductCount = await Product.countDocuments(query);
     const totalPaperProductCount = await Paperproduct.countDocuments(query);
@@ -72,10 +74,7 @@ const getAllProducts = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Products fetched successfully",
-      data: {
-        products,
-        paperProducts,
-      },
+      data: paginatedResults,
       pagination: {
         total: totalCount,
         page: parseInt(page),
@@ -86,6 +85,7 @@ const getAllProducts = async (req, res) => {
     return res.status(500).json({ success: false, message: error.message });
   }
 };
+
 
 
 module.exports = {

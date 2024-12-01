@@ -40,6 +40,38 @@ export const paperProductApi = createApi({
       transformErrorResponse: (response) => response?.error?.message,
       invalidatesTags: ["PaperProduct"],
     }),
+
+    // other product slice
+    getPaperProduct: builder.query({
+      query: `/product`,
+      transformResponse: (response) => response.data,
+      transformErrorResponse: response => response?.error?.message || "An unknown error occured",
+      providesTags: ['product']
+    }),
+    uploadProduct: builder.mutation({
+      query: (body) => ({
+        url: `/product/upload`,
+        method: 'POST',
+        body,
+      }),
+      transformErrorResponse: response => response?.error?.message,
+      invalidatesTags: ["PaperProduct", 'product'],
+    }),
+    deleteProduct: builder.mutation({
+      query: (productId) => ({
+        url: `/product/delete/${productId}`,
+        method: 'DELETE',
+      }),
+    }),
+    updateProduct: builder.mutation({
+      query: ({ body, productId }) => ({
+        url: `/product/update/${productId}`,
+        method: 'PATCH',
+        body,
+      }),
+      transformErrorResponse: response => response?.error?.message,
+      invalidatesTags: ['product', 'paperProduct']
+    })
   }),
 });
 
@@ -48,4 +80,8 @@ export const {
   useUploadPaperProductMutation,
   useDeletePaperProductMutation,
   useUpdatePaperProductMutation,
+  useGetPaperProductQuery,
+  useUploadProductMutation,
+  useDeleteProductMutation,
+  useUpdateProductMutation,
 } = paperProductApi;
