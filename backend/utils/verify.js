@@ -3,7 +3,7 @@ const dotenv = require('dotenv').config();
 
 const verifyToken = (req, res, next) => {
 
-  const cookie = req.headers.cookie;
+  const cookie = req.headers.cookie;  
   if (!cookie) {
     console.log("No cookie found");
     return res.status(401).json({ success: false, message: 'Unauthorized' });

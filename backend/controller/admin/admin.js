@@ -40,45 +40,52 @@ const getAllUser = async (req, res) => {
 
 
 const getAllProducts = async (req, res) => {
-  const { page = 1, limit = 10, search = '', sort = 'name' } = req.query;
-
-  const query = search
-    ? {
-        $or: [
-          { name: { $regex: search, $options: 'i' } },
-          { category: { $regex: search, $options: 'i' } },
-          { subcategory: { $regex: search, $options: 'i' } },
-        ],
-      }
-    : {};
+  const { page = 1, limit = null, search = '', sort = 'name' } = req.query;
 
   try {
-    const productQuery = Product.find(query).sort(sort);
-    const paperProductQuery = Paperproduct.find(query).sort(sort);
+    const query = search
+      ? {
+          $or: [
+            { name: { $regex: search, $options: 'i' } },
+            { category: { $regex: search, $options: 'i' } },
+            { subcategory: { $regex: search, $options: 'i' } },
+          ],
+        }
+      : {};
 
-    const [products, paperProducts] = await Promise.all([productQuery, paperProductQuery]);
+    // Fetch data concurrently
+    const productQuery = Product.find(query);
+    const paperProductQuery = Paperproduct.find(query);
 
-    // Combine results and sort
-    const combinedResults = [...products, ...paperProducts].sort((a, b) =>
-      a[sort] > b[sort] ? 1 : -1
-    );
+    const [products, paperProducts] = await Promise.all([
+      productQuery,
+      paperProductQuery,
+    ]);
 
-    // Apply global pagination
-    const startIndex = (page - 1) * limit;
-    const paginatedResults = combinedResults.slice(startIndex, startIndex + parseInt(limit));
+    // Combine and sort results
+    let combinedResults = [...products, ...paperProducts];
+    if (sort) {
+      combinedResults = combinedResults.sort((a, b) =>
+        a[sort] > b[sort] ? 1 : -1
+      );
+    }
 
-    const totalProductCount = await Product.countDocuments(query);
-    const totalPaperProductCount = await Paperproduct.countDocuments(query);
-    const totalCount = totalProductCount + totalPaperProductCount;
+    // Apply pagination if limit is provided
+    const total = combinedResults.length;
+    const paginatedResults =
+      limit !== null
+        ? combinedResults.slice((page - 1) * limit, page * limit)
+        : combinedResults;
 
+    // Response
     return res.status(200).json({
       success: true,
-      message: "Products fetched successfully",
+      message: 'Products fetched successfully',
       data: paginatedResults,
       pagination: {
-        total: totalCount,
+        total,
         page: parseInt(page),
-        limit: parseInt(limit),
+        limit: limit !== null ? parseInt(limit) : total,
       },
     });
   } catch (error) {

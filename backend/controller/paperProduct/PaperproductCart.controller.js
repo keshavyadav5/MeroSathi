@@ -1,4 +1,5 @@
 const paperProductCartModel = require("../../models/cart/paperproductcart.model");
+const productCartModel = require("../../models/cart/productCart.model");
 
 const paperProductCart = async (req, res) => {
   const {
@@ -103,7 +104,6 @@ const updatePaperProductCart = async (req, res) => {
     if (!cart) {
       return res.status(404).json({ success: false, message: 'Cart not found' });
     }
-    console.log(cart.products);
 
     const product = cart.products.find(item => item._id.toString() === productId);
 
@@ -170,7 +170,17 @@ const getAllCartsItems = async (req, res) => {
     if (!cart) {
       return res.status(200).json({
         success: true,
-        message: "No items in cart",
+        message: "No items in paper product cart",
+        totalItems: 0,
+        data: [],
+      });
+    }
+
+    const productCart = await productCartModel.findOne({ userId });
+    if (!productCart) {
+      return res.status(200).json({
+        success: true,
+        message: "No items in product cart",
         totalItems: 0,
         data: [],
       });
@@ -179,8 +189,9 @@ const getAllCartsItems = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: "Cart items",
-      totalItems: cart.products.length,
+      totalItems: cart.products.length + productCart.product.length,
       data: cart.products,
+      productCartData: productCart.product,
     });
   } catch (error) {
     return res.status(500).json({ success: false, message: 'Internal server error' });

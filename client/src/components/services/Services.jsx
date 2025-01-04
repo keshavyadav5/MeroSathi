@@ -1,23 +1,39 @@
 import React, { useEffect, useState } from 'react'
 import Horizontalscrool from './Horizontalscrool'
-import { printProducts } from '../../Dummy/Allproducts'
-import { useGetAllPaperProductQuery } from '@/redux/Postslice'
+// import { printProducts } from '../../Dummy/Allproducts'
+import axios from 'axios'
+import { toast } from 'react-toastify'
 
 const Services = () => {
   const [data, setData] = useState([])
-  const { data: paperProducts, isLoading, isError, refetch } = useGetAllPaperProductQuery(undefined, {
-    refetchOnMountOrArgChange: true,
-  })
-  useEffect(() => {
-    if (paperProducts) {
-      setData(paperProducts)
+  const AllProduct = async () => {
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_BACKEND_URI}/api/admin/getAllProducts`, {
+        withCredentials: true
+      });
+
+      if (response?.data?.success) {
+        setData(response?.data?.data);
+      }
+
+    } catch (error) {
+      toast.error(error.response.data.message)
+      console.log(error.response);
     }
-  }, [paperProducts])
+  }
+  const trendingProducts = data.filter((item) => item.status === 'trending');
+  const newlaunchedProduct = data.filter((item) => item.status === 'newlaunched');
+  const upcomingProducts = data.filter((item) => item.status === 'upcoming')
+
+
+  useEffect(() => {
+    AllProduct()
+  }, [])
   return (
     <div>
-      <Horizontalscrool printProducts={data} title="Paper Prouducts" />
-      <Horizontalscrool printProducts={printProducts} title="New Launches" />
-      <Horizontalscrool printProducts={printProducts} title="Upcoming Prouducts" />
+      <Horizontalscrool printProducts={trendingProducts} title="Trending Prouducts" />
+      <Horizontalscrool printProducts={newlaunchedProduct} title="New Launches" />
+      <Horizontalscrool printProducts={upcomingProducts} title="Upcoming Prouducts" />
     </div>
   )
 }

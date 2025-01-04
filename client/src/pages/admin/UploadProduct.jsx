@@ -271,8 +271,10 @@ const UploadProduct = () => {
                 required
               >
                 <option value="undefined">undefined</option>
-                <option value="cloth">Clothes</option>
-                <option value="cloth">Clothes</option>
+                <option value="glass">Glass</option>
+                <option value="stationary">Stationary</option>
+                <option value="tshirt">T-shirt</option>
+                <option value="sweeter">Sweeter</option>
               </select>
             </div>
           </div>

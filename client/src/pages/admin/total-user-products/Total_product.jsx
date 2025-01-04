@@ -224,6 +224,13 @@ const Total_product = () => {
   }
 
 
+  // divide products accroding to its category
+  const paperProductSize = getAllProducts.filter((item) => item.category === 'paper-proudct' || []);
+  const giftsSize = getAllProducts.filter((item) => item.category === 'gifts' || []);
+  const stationarySize = getAllProducts.filter((item) => item.category === 'stationary' || []);
+  const marketingSize = getAllProducts.filter((item) => item.category === 'marketing' || []);
+  const merchandiseSize = getAllProducts.filter(item => item.merchandiseSize === 'merchandise' || [])
+
   return (
     <div className='w-full py hidden lg:block overflow-y-auto max-h-screen min-h-screen scrollbar-hide'>
       <div className=''>
@@ -237,35 +244,35 @@ const Total_product = () => {
             <div className='flex items-center bg-orange-100 w-36 px-1 py-1 rounded-md gap-1'>
               <BsFilePdfFill size={32} className='text-green-700 font-bold' />
               <div className='flex flex-col justify-center mb-1'>
-                <h3 className='font-bold font- text-xl'>12</h3>
+                <h3 className='font-bold font- text-xl'>{paperProductSize.length}</h3>
                 <p className='text-xs'>Paper Product</p>
               </div>
             </div>
             <div className='flex items-center bg-rose-100 w-36 px-1 py-1 rounded-md gap-1'>
               <BsFilePdfFill size={32} className='text-green-700 font-bold' />
               <div className='flex flex-col justify-center mb-1'>
-                <h3 className='font-bold font- text-xl'>32</h3>
+                <h3 className='font-bold font- text-xl'>{giftsSize.length}</h3>
                 <p className='text-xs'>Gifts</p>
               </div>
             </div>
             <div className='flex items-center bg-purple-100 w-36 px-1 py-1 rounded-md gap-1'>
               <BsFilePdfFill size={32} className='text-green-700 font-bold' />
               <div className='flex flex-col justify-center mb-1'>
-                <h3 className='font-bold font- text-xl'>25</h3>
+                <h3 className='font-bold font- text-xl'>{stationarySize.length}</h3>
                 <p className='text-xs'>Stationay</p>
               </div>
             </div>
             <div className='flex items-center bg-blue-100 w-36 px-1 py-1 rounded-md gap-1'>
               <BsFilePdfFill size={32} className='text-green-700 font-bold' />
               <div className='flex flex-col justify-center mb-1'>
-                <h3 className='font-bold font- text-xl'>51</h3>
+                <h3 className='font-bold font- text-xl'>{marketingSize.length}</h3>
                 <p className='text-xs'>Marketing</p>
               </div>
             </div>
             <div className='flex items-center bg-blue-100 w-36 px-1 py-1 rounded-md gap-1'>
               <BsFilePdfFill size={32} className='text-green-700 font-bold' />
               <div className='flex flex-col justify-center mb-1'>
-                <h3 className='font-bold font- text-xl'>91</h3>
+                <h3 className='font-bold font- text-xl'>{merchandiseSize.length}</h3>
                 <p className='text-xs'>Merchandise</p>
               </div>
             </div>
@@ -299,7 +306,7 @@ const Total_product = () => {
           {error && <p>Error loading products</p>}
           {getAllProducts && getAllProducts.map((item, index) => (
             <div key={item?._id} className='w-full flex justify-between bg-blue-50 px-2 py-1 items-center rounded-md'>
-              <img src={item?.image} alt="" className='w-20 h-20' />
+              <img src={item?.image || item?.images[0]} alt="" className='w-20 h-20' />
               <div className='flex-1 flex justify-between items-end pl-4'>
                 <div>
                   <h3 className='font-bold text-sm text-[#894fb6]'>{item?.name}</h3>
@@ -307,22 +314,22 @@ const Total_product = () => {
                   <p className='text-sm'>Subcategory: {item.subcategory}</p>
                   <p className='text-sm'>Price: {item.price}</p>
                   {expandedItems[item._id] && (
-                  <div>
-                    <p className="text-sm">Status: {item.status}</p>
-                    {item.category !== 'paper-product' && (
-                      <div>
-                        <p className="text-sm">Stock: {item.stock}</p>
-                        <p className="text-sm">Type: {item.type}</p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                    <div>
+                      <p className="text-sm">Status: {item.status}</p>
+                      {item.category !== 'paper-product' && (
+                        <div>
+                          <p className="text-sm">Stock: {item.stock}</p>
+                          <p className="text-sm">Type: {item.type}</p>
+                        </div>
+                      )}
+                    </div>
+                  )}
                   <button
-                  className="text-[#894fb6] cursor-pointer"
-                  onClick={() => toggleExpand(item._id)}
-                >
-                  {expandedItems[item._id] ? '...see less' : '...see more'}
-                </button>
+                    className="text-[#894fb6] cursor-pointer"
+                    onClick={() => toggleExpand(item._id)}
+                  >
+                    {expandedItems[item._id] ? '...see less' : '...see more'}
+                  </button>
                 </div>
                 <div className='text-center flex gap-4'>
                   <MdEditDocument

@@ -27,6 +27,7 @@ import Total_user from './pages/admin/total-user-products/Total_user'
 import UploadpaperproductDetails from './components/user/paper-product/UploadpaperproductDetails'
 import Cart from './components/user/cart/Cart'
 import UploadProduct from './pages/admin/UploadProduct'
+import Uploadproductdetails from './components/user/product/Uploadproductdetails'
 
 
 const App = () => {
@@ -69,6 +70,7 @@ const App = () => {
           {/** User Features routes */}
           <Route path='print-paper-product/:category/:subcategory/:name' element={<PrintPaperProduct />} />
           <Route path='upload-paper-product-details' element={<UploadpaperproductDetails />} />
+          <Route path='upload-product-details/:category/:subcategory/:name' element={<Uploadproductdetails />} />
           <Route path='/cart' element={<Cart />} />
         </Route>
       </Routes>

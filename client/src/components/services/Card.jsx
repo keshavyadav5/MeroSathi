@@ -8,14 +8,18 @@ const Card = ({ item }) => {
   const navigate = useNavigate()
 
   const handleNavigate = () => {
-    if (currentUser && currentUser?.user?.role === 'admin') {
-      toast.error("You must an user to use this facilities")
+    // if (currentUser && currentUser?.user?.role === 'admin') {
+    //   toast.error("You must an user to use this facilities")
+    //   return;
+    // }
+    if (!currentUser) {
+      navigate('auth/signin');
       return;
     }
-    if (item?.category === "paper-product" && currentUser) {
+    if (item?.category === "paper-product") {
       navigate(`/print-paper-product/${item?.category}/${item?.subcategory}/${item?.name}`)
     } else {
-      navigate('auth/signin')
+      navigate(`/upload-product-details/${item?.category}/${item?.subcategory}/${item?.name}`)
     }
   }
   return (
@@ -23,7 +27,7 @@ const Card = ({ item }) => {
       <div className='w-48 h-48 sm:w-56 sm:h-56 flex-shrink-0 rounded-sm flex flex-col items-center overflow-hidden border shadow-md hover:shadow-lg group transition-all duration-300'>
 
         <div className='w-full h-[80%]'>
-          <img src={item.image} alt={item.name} className='w-full h-full object-cover rounded-t-none rounded-b-xl border-b-2 group-hover:scale-x-105 transition-all duration-300' />
+          <img src={item.image || item.images[0]} alt={item.name} className='w-full h-full object-cover rounded-t-none rounded-b-xl border-b-2 group-hover:scale-x-105 transition-all duration-300' />
         </div>
 
         <div className='py-2 text-center'>
