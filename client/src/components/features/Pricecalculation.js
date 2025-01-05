@@ -29,3 +29,11 @@ export const paperProductPriceCalculation = (uploadData) => {
 
   return { totalPrice, bindingCost };
 };
+
+export const productPriceCalculation = (data) => {
+  const price = data.price * data.quantity;
+  const bothSidePrice = data.printlocation === "f&b" ? 100 : 0;
+
+  return price + bothSidePrice;
+};
+

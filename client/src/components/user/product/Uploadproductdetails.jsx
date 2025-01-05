@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import Loading from '@/components/features/Loading';
 import { Button } from '@/components/ui/button';
 import { FaPencil } from "react-icons/fa6";
@@ -15,6 +15,7 @@ const Uploadproductdetails = () => {
   const { name } = useParams();
   const [image, setImage] = useState('');
   const [description, setDescription] = useState([]);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     category: '',
@@ -48,9 +49,9 @@ const Uploadproductdetails = () => {
         },
         { withCredentials: true }
       );
-      console.log(response);
-
       toast.success('Product added to cart');
+      navigate('/cart')
+      
     } catch (error) {
       console.log(error);
       toast.error(error?.response?.data?.message || "error to upload the cart")
