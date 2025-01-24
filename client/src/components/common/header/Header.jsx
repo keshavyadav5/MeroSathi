@@ -117,7 +117,7 @@ const Header = () => {
                   </DropdownMenuItem>
                 ) : (
                   <>
-                    <DropdownMenuItem onClick={() => navigate('/orders')}>
+                    <DropdownMenuItem onClick={() => navigate('/order')}>
                       <ListOrdered /> Orders
                     </DropdownMenuItem>
                     <DropdownMenuItem onClick={() => navigate('/cart')}>

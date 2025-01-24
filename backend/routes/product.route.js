@@ -13,6 +13,7 @@ const {
   getProduct,
   deleteProduct
 } = require('../controller/product/product.controller');
+const { uploadPaperProductOrder } = require('../controller/order/paperproductController');
 const router = express.Router();
 
 // paper product routes 
@@ -21,7 +22,7 @@ router.delete('/paper-product/delete/:productId', verifyToken, deletePaperProduc
 router.patch('/paper-product/update/:productId', verifyToken, updatePaperProduct)
 router.get('/paper-product', getPaperProduct)
 
-// other product routes except paper product
+// product routes except paper product
 router.post('/product/upload',verifyToken, uploadProduct);
 router.delete('/product/delete/:productId',verifyToken, deleteProduct)
 router.patch('/product/update/:productId',verifyToken,updateProduct);

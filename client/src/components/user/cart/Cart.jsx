@@ -404,7 +404,10 @@ const Cart = () => {
             <h2 className="text-2xl font-semibold text-slate-600">Sub total</h2>
             <p className="text-2xl font-semibold ">Rs. {totalPrice}</p>
           </div>
-          <Button className="bg-[#533d64] hover:bg-[#7c519b]">
+          <Button 
+          className="bg-[#533d64] hover:bg-[#7c519b]"
+          onClick={() => navigate('/checkout')}
+          >
             Proceed to Pay
           </Button>
         </div>

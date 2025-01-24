@@ -53,7 +53,7 @@ const UploadpaperproductDetails = () => {
         pages: files.pages,
         subcategory: files.subcategory,
         productname: files.productname,
-        price: response?.data?.paperProducts[0]?.price || 0,
+        price: (response?.data?.data?.[0].price).toFixed(2) || 0,
       }));
     } catch (error) {
       console.error("Error fetching data:", error.response);

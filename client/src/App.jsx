@@ -28,6 +28,10 @@ import UploadpaperproductDetails from './components/user/paper-product/Uploadpap
 import Cart from './components/user/cart/Cart'
 import UploadProduct from './pages/admin/UploadProduct'
 import Uploadproductdetails from './components/user/product/Uploadproductdetails'
+import AllProduct from './components/products/AllProduct'
+import AllProductCatogory from './components/products/AllProductCatogory'
+import Order from './components/user/checkout/Order'
+import Checkout from './components/user/checkout/Checkout'
 
 
 const App = () => {
@@ -66,12 +70,16 @@ const App = () => {
           </Route>
 
           {/** All Product Routes */}
+          <Route path='/allProducts' element={<AllProduct />} />
+          <Route path='/allProducts/:category' element={<AllProductCatogory />} />
 
           {/** User Features routes */}
           <Route path='print-paper-product/:category/:subcategory/:name' element={<PrintPaperProduct />} />
           <Route path='upload-paper-product-details' element={<UploadpaperproductDetails />} />
           <Route path='upload-product-details/:category/:subcategory/:name' element={<Uploadproductdetails />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/order' element={<Order />} />
+          <Route path='/checkout' element={<Checkout />} />
         </Route>
       </Routes>
       <Footer />

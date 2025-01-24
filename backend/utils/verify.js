@@ -2,14 +2,18 @@ const jwt = require('jsonwebtoken');
 const dotenv = require('dotenv').config();
 
 const verifyToken = (req, res, next) => {
-
-  const cookie = req.headers.cookie;  
+  const cookie = req.headers.cookie;
+  
   if (!cookie) {
     console.log("No cookie found");
     return res.status(401).json({ success: false, message: 'Unauthorized' });
   }
 
-  const token = cookie.split("=")[1];
+  const token = cookie
+    .split('; ')
+    .find((c) => c.startsWith('token='))
+    ?.split('=')[1];
+
   if (!token) {
     console.log("No token found in cookie");
     return res.status(401).json({ success: false, message: 'Unauthorized' });

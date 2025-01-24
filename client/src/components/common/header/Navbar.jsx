@@ -19,11 +19,11 @@ const Navbar = () => {
   ];
 
   const productItem = [
-    { name: "Paper Products", slug: "/search?q=Paper_Products", active: false },
-    { name: "Gifts", slug: "/search?q=Gifts", active: false },
-    { name: "Stationary", slug: "/search?q=Stationary", active: false },
-    { name: "Marketing", slug: "/search?q=Marketing", active: false },
-    { name: "Merchandise", slug: "/search?q=Event_Merchandise", active: false },
+    { name: "Paper Products", slug: "allproducts/search?q=paper-product", active: false },
+    { name: "Gifts", slug: "allproducts/search?q=gifts", active: false },
+    { name: "Stationary", slug: "allproducts/search?q=stationary", active: false },
+    { name: "Marketing", slug: "allproducts/search?q=marketing", active: false },
+    { name: "Merchandise", slug: "allproducts/search?q=event_merchandise", active: false },
   ];
 
   return (
